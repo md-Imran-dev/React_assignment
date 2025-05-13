@@ -15,22 +15,29 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MenuIcon from "@mui/icons-material/Menu";
 import ThemeToggle from "../common/ThemeToggle";
 
-const HeaderAppBar = styled(AppBar)`
-  background-color: ${props => props.theme.colors.background.paper};
-  color: ${props => props.theme.colors.text.primary.dark};
+
+const HeaderAppBar = styled.div`
+  background-color: ${props => props.theme.colors.background.main};
+  color: ${props => props.theme.colors.text.primary.light};
   box-shadow: none;
 `;
 
 const SearchWrapper = styled.div`
   position: relative;
   border-radius: ${props => props.theme.borderRadius.md};
-  background-color: ${props => props.theme.colors.background.subdued};
+  background-color: ${props => props.theme.mode === 'light'
+    ? props.theme.colors.background.subdued
+    : 'rgba(255, 255, 255, 0.15)'
+  };
   margin-right: ${props => props.theme.spacing(2)};
   margin-left: 0;
   width: 100%;
   
   &:hover {
-    background-color: ${props => props.theme.colors.gray['10']};
+    background-color: ${props => props.theme.mode === 'light'
+      ? props.theme.colors.gray['10']
+      : 'rgba(255, 255, 255, 0.25)'
+    };
   }
   
   @media (min-width: ${props => props.theme.breakpoints.sm}) {
@@ -47,7 +54,10 @@ const SearchIconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props => props.theme.colors.text.secondary.dark};
+  color: ${props => props.theme.mode === 'light'
+    ? props.theme.colors.text.secondary.dark
+    : props.theme.colors.text.primary.light
+  };
 `;
 
 const StyledInputBase = styled(InputBase)`
@@ -66,22 +76,32 @@ const StyledInputBase = styled(InputBase)`
 `;
 
 const BreadcrumbBar = styled(Box)`
-  background-color: ${props => props.theme.colors.background.paper};
-  padding: ${props => `${props.theme.spacing(1)} ${props.theme.spacing(3)}`};
+  background-color: ${props => props.theme.colors.background.main};
   border-bottom: 1px solid ${props => props.theme.colors.border.light};
-`;
-
-const LogoAvatar = styled(Avatar)`
-  background-color: ${props => props.theme.colors.primary.main};
-  width: 32px;
-  height: 32px;
-  margin-right: ${props => props.theme.spacing(1)};
+padding: 12px 16px;
+align-items: center;
+flex-shrink: 0;
 `;
 
 const UserAvatar = styled(Avatar)`
-  background-color: ${props => props.theme.colors.primary.main};
+  background-color: ${props => props.theme.mode === 'light'
+    ? props.theme.colors.primary.main
+    : props.theme.colors.background.main
+  };
+  color: ${props => props.theme.mode === 'light'
+    ? props.theme.colors.text.primary.light
+    : props.theme.colors.primary.main
+  };
   width: 36px;
   height: 36px;
+`;
+
+// Update icon colors based on theme mode
+const StyledIconButton = styled(IconButton)`
+  color: ${props => props.theme.mode === 'light'
+    ? props.theme.colors.text.primary.dark
+    : props.theme.colors.text.primary.light
+  };
 `;
 
 const Header = () => {
@@ -89,26 +109,17 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <HeaderAppBar position="static">
         <Toolbar>
-          <IconButton
+          <StyledIconButton
             size="large"
             edge="start"
-            color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2, display: { xs: "block", sm: "none" } }}
           >
             <MenuIcon />
-          </IconButton>
+          </StyledIconButton>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <LogoAvatar>Q</LogoAvatar>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" }, fontWeight: "bold" }}
-            >
-              Quotient
-            </Typography>
+            <img src={'/assets/images/logo-light.png'} alt="logo" width={125} height={32} />
           </Box>
 
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
@@ -124,15 +135,14 @@ const Header = () => {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton
+            <StyledIconButton
               size="large"
               aria-label="show notifications"
-              color="inherit"
             >
               <Badge badgeContent={4} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </StyledIconButton>
             <ThemeToggle />
             <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
               <UserAvatar>MS</UserAvatar>
