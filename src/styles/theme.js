@@ -17,10 +17,11 @@ const lightTheme = {
     
     // Background colors
     background: {
-      main: '#FFFFFF',      // Light/Main BG (white)
+      main: '#F6F8F9',      // Light/Main BG (white)
       dark: '#202124',      // Dark BG/Main BG
       paper: '#F6F8F9',     // Light/Sub BG
-      subdued: '#F7FCFF',   // Very light blue-tinted background
+      subdued: '#F7FCFF',   // Very light blue-tinted background,
+      card: '#FFFFFF',
     },
     
     // Text colors
@@ -68,6 +69,7 @@ const lightTheme = {
     border: {
       light: '#DADCE0',     // Border/Light
       dark: '#2D2D2D',
+      card: 'rgba(14, 37, 60, 0.10)'
     }
   },
   
@@ -135,10 +137,11 @@ const darkTheme = {
   colors: {
     ...lightTheme.colors,
     background: {
-      main: '#0A1929',
+      main: '#010D19',
       dark: '#000000',
       paper: '#132F4C',
       subdued: '#1E3A57',
+      card: '#001121',
     },
     text: {
       primary: {
@@ -162,6 +165,7 @@ const darkTheme = {
     border: {
       light: '#2D4B6E',
       dark: '#1E3A57',
+      card: 'rgba(255, 255, 255, 0.13)'
     }
   },
   shadows: {
