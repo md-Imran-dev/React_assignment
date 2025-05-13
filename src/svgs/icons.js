@@ -107,3 +107,33 @@ export const SaveIcon = ({height, width, color, ...props}) => (
   />
 </svg>
 )
+export const TotalOrdersIcon = ({height, width, color, ...props}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill={color}
+      fillRule="evenodd"
+      d="M4 .781C4.5.281 5.178.001 5.885 0h12.23C18.822 0 19.5.281 20 .781L23.219 4c.5.5.78 1.178.781 1.885v15.448a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V5.885C0 5.178.281 4.5.781 4L4 .781Zm14.115 1.886H5.885L3.22 5.333H20.78l-2.666-2.666ZM9.333 12a1.333 1.333 0 1 0-2.666 0 5.333 5.333 0 1 0 10.666 0 1.333 1.333 0 1 0-2.666 0 2.667 2.667 0 0 1-5.334 0Z"
+      clipRule="evenodd"
+    />
+    <defs>
+      <linearGradient
+        id="a"
+        x1={12}
+        x2={12}
+        y1={0}
+        y2={25.333}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.5} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+    </defs>
+  </svg>
+  )

@@ -1,19 +1,19 @@
 import React from 'react';
 import { Container } from '@mui/material';
 import NavigationTabs from './NavigationTabs';
-import MetricsCarousel from './MetricsCarousel';
+import MetricsGrid from './MetricsCarousel';
 import styled from 'styled-components';
 
 const HeaderContainer = styled(Container)`
-  margin-bottom: ${props => props.theme.spacing(3)};
+  margin-bottom: 32px;
 `;
 
 const HeaderCard = styled.div`
-  background-color: ${props => props.theme.colors.background.paper};
-  border-radius: ${props => props.theme.borderRadius.lg};
-  padding: ${props => props.theme.spacing(3)};
-  box-shadow: ${props => props.theme.shadows.sm};
-  overflow: hidden;
+  background-color: white;
+  border-radius: 0;
+  padding: 24px;
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
 `;
 
 const DashboardHeader = () => {
@@ -21,7 +21,7 @@ const DashboardHeader = () => {
     <HeaderContainer maxWidth="xl">
       <HeaderCard>
         <NavigationTabs />
-        <MetricsCarousel />
+        <MetricsGrid />
       </HeaderCard>
     </HeaderContainer>
   );

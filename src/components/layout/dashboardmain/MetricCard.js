@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Typography, Avatar } from '@mui/material';
+import { Paper, Typography, Box } from '@mui/material';
 import styled from 'styled-components';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
@@ -10,55 +10,62 @@ import TimerIcon from '@mui/icons-material/Timer';
 import LoopIcon from '@mui/icons-material/Loop';
 
 const CardContainer = styled(Paper)`
-  padding: ${props => props.theme.spacing(3)};
+  padding: ${props => props.theme.spacing(4)};
   display: flex;
   flex-direction: column;
-  min-width: 220px;
   height: 100%;
-  border-radius: ${props => props.theme.borderRadius.lg};
-  background-color: ${props => props.theme.colors.background.paper};
-  box-shadow: ${props => props.theme.shadows.sm};
+  border-radius: 8px;
+  background-color: ${props => props.theme.colors.background.card};
+  border: 1px solid #e0e0e0;
+  box-shadow: none;
 `;
 
-const IconContainer = styled(Avatar)`
-  background-color: ${props => props.bgcolor || props.theme.colors.gray['05']};
-  width: 40px;
-  height: 40px;
-  padding: ${props => props.theme.spacing(2)};
-`;
-
-const HeaderContainer = styled.div`
+const CardHeader = styled(Box)`
   display: flex;
   align-items: center;
-  margin-bottom: ${props => props.theme.spacing(2)};
+  margin-bottom: 8px;
+`;
+
+const IconWrapper = styled(Box)`
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  background-color: ${props => props.bgcolor};
 `;
 
 const Title = styled(Typography)`
-  margin-left: ${props => props.theme.spacing(1)};
-  color: ${props => props.theme.colors.text.secondary.dark};
-  font-size: ${props => props.theme.typography.fontSizes.sm};
-  font-weight: ${props => props.theme.typography.fontWeights.medium};
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
 `;
 
 const Value = styled(Typography)`
-  font-size: ${props => props.theme.typography.fontSizes['2xl']};
-  font-weight: ${props => props.theme.typography.fontWeights.bold};
-  color: ${props => props.theme.colors.text.primary.dark};
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
 `;
 
-const TrendIndicator = styled.div`
+const TrendContainer = styled(Box)`
   display: flex;
   align-items: center;
-  color: ${props => props.trend === 'up' ? 
-    props.theme.colors.accent.green : 
-    props.theme.colors.accent.red};
-  margin-top: ${props => props.theme.spacing(2)};
-  font-size: ${props => props.theme.typography.fontSizes.sm};
+  font-size: 12px;
 `;
 
-const TrendText = styled(Typography)`
-  margin-left: ${props => props.theme.spacing(1)};
-  font-size: ${props => props.theme.typography.fontSizes.sm};
+const TrendValue = styled(Box)`
+  display: flex;
+  align-items: center;
+  color: ${props => props.trend === 'up' ? '#22C55E' : '#E31D1C'};
+  margin-right: 5px;
+`;
+
+const PeriodText = styled(Typography)`
+  font-size: 12px;
+  color: #666;
 `;
 
 const getIconComponent = (title) => {
@@ -98,28 +105,27 @@ const getIconBackground = (title) => {
 const MetricCard = ({ title, value, trendValue, trendDirection, period }) => {
   return (
     <CardContainer elevation={0}>
-      <HeaderContainer>
-        <IconContainer bgcolor={getIconBackground(title)}>
+      <CardHeader>
+        <IconWrapper bgcolor={getIconBackground(title)}>
           {getIconComponent(title)}
-        </IconContainer>
-        <Title variant="subtitle2">
-          {title}
-        </Title>
-      </HeaderContainer>
+        </IconWrapper>
+        <Title>{title}</Title>
+      </CardHeader>
       
-      <Value variant="h4">
+      <Value>
         {value}
       </Value>
       
-      <TrendIndicator trend={trendDirection}>
-        {trendDirection === 'up' ? 
-          <TrendingUpIcon fontSize="small" /> : 
-          <TrendingDownIcon fontSize="small" />
-        }
-        <TrendText variant="body2">
-          {trendValue} From The {period}
-        </TrendText>
-      </TrendIndicator>
+      <TrendContainer>
+        <TrendValue trend={trendDirection}>
+          {trendDirection === 'up' ? 
+            <TrendingUpIcon fontSize="small" style={{ marginRight: '2px' }} /> : 
+            <TrendingDownIcon fontSize="small" style={{ marginRight: '2px' }} />
+          }
+          {trendValue}
+        </TrendValue>
+        <PeriodText>From The {period}</PeriodText>
+      </TrendContainer>
     </CardContainer>
   );
 };
