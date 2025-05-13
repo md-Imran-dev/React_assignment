@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   Box,
@@ -14,6 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MenuIcon from "@mui/icons-material/Menu";
 import ThemeToggle from "../common/ThemeToggle";
+import ThemeContext from "../../context/ThemeContext";
 
 
 const HeaderAppBar = styled.div`
@@ -105,6 +106,8 @@ const StyledIconButton = styled(IconButton)`
 `;
 
 const Header = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <HeaderAppBar position="static">
@@ -119,7 +122,11 @@ const Header = () => {
           </StyledIconButton>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <img src={'/assets/images/logo-light.png'} alt="logo" width={125} height={32} />
+            {!isDarkMode ? (
+              <img src={'/assets/images/logo-light.png'} alt="logo" width={125} height={32} />
+            ) : (
+              <img src={'/assets/images/logo-dark.png'} alt="logo" width={125} height={32} />
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
