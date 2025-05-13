@@ -10,17 +10,20 @@ const AccountHeaderContainer = styled.div`
   gap: 16px;
   align-self: stretch;
   background: ${props => props.theme.colors.background.main};
-  color: #333;
-  border-radius: 8px 8px 0 0;
-  border: 1px solid var(--Dark-Border-Border-Main, rgba(255, 255, 255, 0.13));
+  border: 1px solid ${props => props.theme.colors.border.card};
   border-radius: 24px;
-box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.20);
 `;
 
 // Avatar container
 const AvatarContainer = styled.div`  
+  position: relative;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   overflow: hidden;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
 `;
 
 const Avatar = styled.div`
@@ -43,9 +46,10 @@ const OnlineIndicator = styled.div`
   height: 10px;
   background-color: #22C55E;
   border-radius: 50%;
-  border: 2px solid #0A1929;
+  border: 2px solid ${props => props.theme.colors.background.main};
   top: 2px;
   right: 2px;
+  z-index: 2;
 `;
 
 const EditButton = styled.div`
@@ -59,6 +63,7 @@ const EditButton = styled.div`
   line-height: 14px;
   font-weight: 400;
   text-align: center;
+  height: 14px;
 `;
 
 // Content container
@@ -85,7 +90,7 @@ const AccountName = styled.h1`
   font-weight: 600;
   margin: 0;
   line-height: 1.2;
-  color: ${props => props.theme.colors.text.primary.light};
+  color: ${props => props.theme.colors.text.primary};
 `;
 
 const BusinessTag = styled.span`
@@ -102,7 +107,7 @@ const BusinessTag = styled.span`
 
 const AccountEmail = styled.p`
   font-size: 12px;
-  color: ${props => props.theme.colors.text.secondary.light};
+  color: ${props => props.theme.colors.text.secondary};
   margin: 0;
   margin-top: 4px;
 `;
@@ -183,7 +188,7 @@ const ActionsContainer = styled.div`
 
 const StatusButton = styled.button`
   background-color: transparent;
-  color: #6B46C1;
+  color: ${props => props.theme.colors.primary.main};
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;
@@ -244,14 +249,15 @@ const ProfileHeader = () => {
 
   return (
     <AccountHeaderContainer>
-      <AvatarContainer>
-        <Avatar>
-          <OnlineIndicator />
-          TG
-          <EditButton>Edit</EditButton>
-        </Avatar>
-        
-      </AvatarContainer>
+      <div style={{position: 'relative', }}>
+        <OnlineIndicator />
+        <AvatarContainer>
+          <Avatar>
+            TG
+            <EditButton>Edit</EditButton>
+          </Avatar>
+        </AvatarContainer>
+      </div>
       
       <ContentContainer>
         {isEditing ? (
@@ -281,7 +287,7 @@ const ProfileHeader = () => {
         ) : (
           <NameContainer>
             <NameRow>
-              <AccountName>{firstName} {lastName}</AccountName>
+              <AccountName>{accountName}</AccountName>
               <BusinessTag>BUSINESS</BusinessTag>
             </NameRow>
             <AccountEmail>{accountEmail}</AccountEmail>
