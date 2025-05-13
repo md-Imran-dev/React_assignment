@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, IconButton, Paper } from '@mui/material';
+import { Box, Typography, TextField, Button, IconButton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import SaveIcon from '@mui/icons-material/Save';
+
 import PhoneNumberInput from './PhoneNumberInput';
 import AddIcon from '@mui/icons-material/Add';
+import styled from 'styled-components';
+import { SaveIcon } from '../../../svgs/icons';
+
+const MainContainer = styled.div`
+  padding: 16px;
+  align-self: stretch;
+  background-color: ${props => props.theme.colors.background.card};
+  border: 1px solid ${props => props.theme.colors.border.card};
+  border-radius: 24px;
+  width: 100%;
+  height: auto;
+`;
 
 
 const BusinessDetailsForm = () => {
@@ -43,20 +55,14 @@ const BusinessDetailsForm = () => {
   };
 
   return (
-    <Paper elevation={0} sx={{ p: 3, borderRadius: 3 }}>
+    <MainContainer>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h6" fontWeight="bold">
           Business Details
         </Typography>
         
         <Button
-          variant="contained"
-          startIcon={<SaveIcon />}
-          sx={{
-            backgroundColor: '#4caf50',
-            '&:hover': { backgroundColor: '#388e3c' },
-            textTransform: 'none',
-          }}
+          startIcon={<SaveIcon height={14} width={14} />}
         >
           Save & Close
         </Button>
@@ -98,7 +104,7 @@ const BusinessDetailsForm = () => {
             size="small"
             sx={{ color: '#9c27b0' }}
           >
-            <AddIcon />
+            <AddIcon onClick={handleAddPhone} />
           </IconButton>
         </Box>
         
@@ -136,7 +142,7 @@ const BusinessDetailsForm = () => {
           </option>
         </TextField>
       </Box>
-    </Paper>
+    </MainContainer>
   );
 };
 

@@ -92,3 +92,18 @@ export const CalendarIcon = ({height, width, color, ...props}) => (
     />
   </svg>
 )
+export const SaveIcon = ({height, width, color, ...props}) => (
+  <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={width}
+  height={height}
+  fill="none"
+  {...props}
+>
+  <path
+    fill="#22C55E"
+    stroke="#22C55E"
+    d="M2.167 1h2v2.417l.008.173a1.752 1.752 0 0 0 1.742 1.577H9.25A1.75 1.75 0 0 0 11 3.417V1c.267.003.523.097.727.265l.086.077 2.012 2.012c.219.218.342.515.342.825v9.654A1.168 1.168 0 0 1 13 15h-1.167V9.667A2.167 2.167 0 0 0 9.667 7.5H5.5a2.167 2.167 0 0 0-2.167 2.167V15H2.167A1.167 1.167 0 0 1 1 13.833V2.167a1.167 1.167 0 0 1 1.052-1.161L2.167 1Zm7 9.167V15H6v-4.833h3.167ZM8.333 1v1.5h-1.5V1h1.5Z"
+  />
+</svg>
+)
