@@ -1,5 +1,4 @@
 import React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
   Box,
@@ -10,58 +9,85 @@ import {
   Badge,
   Avatar,
 } from "@mui/material";
+import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MenuIcon from "@mui/icons-material/Menu";
+import ThemeToggle from "../common/ThemeToggle";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
+const HeaderAppBar = styled(AppBar)`
+  background-color: ${props => props.theme.colors.background.paper};
+  color: ${props => props.theme.colors.text.primary.dark};
+  box-shadow: none;
+`;
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+const SearchWrapper = styled.div`
+  position: relative;
+  border-radius: ${props => props.theme.borderRadius.md};
+  background-color: ${props => props.theme.colors.background.subdued};
+  margin-right: ${props => props.theme.spacing(2)};
+  margin-left: 0;
+  width: 100%;
+  
+  &:hover {
+    background-color: ${props => props.theme.colors.gray['10']};
+  }
+  
+  @media (min-width: ${props => props.theme.breakpoints.sm}) {
+    margin-left: ${props => props.theme.spacing(3)};
+    width: auto;
+  }
+`;
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "50ch",
-    },
-  },
-}));
+const SearchIconWrapper = styled.div`
+  padding: ${props => `${props.theme.spacing(0)} ${props.theme.spacing(2)}`};
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${props => props.theme.colors.text.secondary.dark};
+`;
+
+const StyledInputBase = styled(InputBase)`
+  color: inherit;
+  width: 100%;
+  
+  .MuiInputBase-input {
+    padding: ${props => props.theme.spacing(1)};
+    padding-left: calc(1em + ${props => props.theme.spacing(4)});
+    width: 100%;
+    
+    @media (min-width: ${props => props.theme.breakpoints.md}) {
+      width: 50ch;
+    }
+  }
+`;
+
+const BreadcrumbBar = styled(Box)`
+  background-color: ${props => props.theme.colors.background.paper};
+  padding: ${props => `${props.theme.spacing(1)} ${props.theme.spacing(3)}`};
+  border-bottom: 1px solid ${props => props.theme.colors.border.light};
+`;
+
+const LogoAvatar = styled(Avatar)`
+  background-color: ${props => props.theme.colors.primary.main};
+  width: 32px;
+  height: 32px;
+  margin-right: ${props => props.theme.spacing(1)};
+`;
+
+const UserAvatar = styled(Avatar)`
+  background-color: ${props => props.theme.colors.primary.main};
+  width: 36px;
+  height: 36px;
+`;
 
 const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        sx={{ backgroundColor: "white" }}
-      >
+      <HeaderAppBar position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -74,9 +100,7 @@ const Header = () => {
           </IconButton>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Avatar sx={{ bgcolor: "#5e35b1", width: 32, height: 32, mr: 1 }}>
-              Q
-            </Avatar>
+            <LogoAvatar>Q</LogoAvatar>
             <Typography
               variant="h6"
               noWrap
@@ -88,7 +112,7 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-            <Search>
+            <SearchWrapper>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -96,7 +120,7 @@ const Header = () => {
                 placeholder="Search"
                 inputProps={{ "aria-label": "search" }}
               />
-            </Search>
+            </SearchWrapper>
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -109,10 +133,9 @@ const Header = () => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            <ThemeToggle />
             <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
-              <Avatar sx={{ bgcolor: "#5e35b1", width: 36, height: 36 }}>
-                MS
-              </Avatar>
+              <UserAvatar>MS</UserAvatar>
               <Box sx={{ ml: 1, display: { xs: "none", sm: "block" } }}>
                 <Typography variant="body2" component="div">
                   Manoj Sharma
@@ -124,15 +147,13 @@ const Header = () => {
             </Box>
           </Box>
         </Toolbar>
-      </AppBar>
+      </HeaderAppBar>
 
-      <Box
-        sx={{ bgcolor: "white", px: 3, py: 1, borderBottom: "1px solid #eee" }}
-      >
+      <BreadcrumbBar>
         <Typography variant="body2" color="text.secondary">
           CRM / Account / Account Details
         </Typography>
-      </Box>
+      </BreadcrumbBar>
     </Box>
   );
 };

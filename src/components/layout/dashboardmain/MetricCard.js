@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Paper, Typography, Avatar } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Paper, Typography, Avatar } from '@mui/material';
+import styled from 'styled-components';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -9,29 +9,57 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import TimerIcon from '@mui/icons-material/Timer';
 import LoopIcon from '@mui/icons-material/Loop';
 
-const CardContainer = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2),
-  display: 'flex',
-  flexDirection: 'column',
-  minWidth: 220,
-  height: '100%',
-  borderRadius: theme.shape.borderRadius * 2,
-}));
+const CardContainer = styled(Paper)`
+  padding: ${props => props.theme.spacing(3)};
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  height: 100%;
+  border-radius: ${props => props.theme.borderRadius.lg};
+  background-color: ${props => props.theme.colors.background.paper};
+  box-shadow: ${props => props.theme.shadows.sm};
+`;
 
-const IconContainer = styled(Avatar)(({ color }) => ({
-  backgroundColor: color || '#f5f5f5',
-  width: 40,
-  height: 40,
-  padding: 8,
-}));
+const IconContainer = styled(Avatar)`
+  background-color: ${props => props.bgcolor || props.theme.colors.gray['05']};
+  width: 40px;
+  height: 40px;
+  padding: ${props => props.theme.spacing(2)};
+`;
 
-const TrendIndicator = styled(Box)(({ trend }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  color: trend === 'up' ? '#4caf50' : '#f44336',
-  marginTop: 8,
-  fontSize: '0.875rem',
-}));
+const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: ${props => props.theme.spacing(2)};
+`;
+
+const Title = styled(Typography)`
+  margin-left: ${props => props.theme.spacing(1)};
+  color: ${props => props.theme.colors.text.secondary.dark};
+  font-size: ${props => props.theme.typography.fontSizes.sm};
+  font-weight: ${props => props.theme.typography.fontWeights.medium};
+`;
+
+const Value = styled(Typography)`
+  font-size: ${props => props.theme.typography.fontSizes['2xl']};
+  font-weight: ${props => props.theme.typography.fontWeights.bold};
+  color: ${props => props.theme.colors.text.primary.dark};
+`;
+
+const TrendIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${props => props.trend === 'up' ? 
+    props.theme.colors.accent.green : 
+    props.theme.colors.accent.red};
+  margin-top: ${props => props.theme.spacing(2)};
+  font-size: ${props => props.theme.typography.fontSizes.sm};
+`;
+
+const TrendText = styled(Typography)`
+  margin-left: ${props => props.theme.spacing(1)};
+  font-size: ${props => props.theme.typography.fontSizes.sm};
+`;
 
 const getIconComponent = (title) => {
   switch (title) {
@@ -50,35 +78,47 @@ const getIconComponent = (title) => {
   }
 };
 
+const getIconBackground = (title) => {
+  switch (title) {
+    case 'Total Orders':
+      return '#fff8e1';
+    case 'Total Taken':
+      return '#fce4ec';
+    case 'Total Revenue':
+      return '#e0f2f1';
+    case 'Pending Orders':
+      return '#ede7f6';
+    case 'Pending Returns':
+      return '#fce4ec';
+    default:
+      return '#f5f5f5';
+  }
+};
+
 const MetricCard = ({ title, value, trendValue, trendDirection, period }) => {
   return (
     <CardContainer elevation={0}>
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-        <IconContainer 
-          color={title === 'Total Orders' ? '#fff8e1' : 
-                title === 'Total Taken' ? '#fce4ec' : 
-                title === 'Total Revenue' ? '#e0f2f1' :
-                title === 'Pending Orders' ? '#ede7f6' : '#fce4ec'}
-        >
+      <HeaderContainer>
+        <IconContainer bgcolor={getIconBackground(title)}>
           {getIconComponent(title)}
         </IconContainer>
-        <Typography variant="subtitle2" color="text.secondary" sx={{ ml: 1 }}>
+        <Title variant="subtitle2">
           {title}
-        </Typography>
-      </Box>
+        </Title>
+      </HeaderContainer>
       
-      <Typography variant="h4" component="div" fontWeight="bold">
+      <Value variant="h4">
         {value}
-      </Typography>
+      </Value>
       
       <TrendIndicator trend={trendDirection}>
         {trendDirection === 'up' ? 
-          <TrendingUpIcon fontSize="small" sx={{ mr: 0.5 }} /> : 
-          <TrendingDownIcon fontSize="small" sx={{ mr: 0.5 }} />
+          <TrendingUpIcon fontSize="small" /> : 
+          <TrendingDownIcon fontSize="small" />
         }
-        <Typography variant="body2" component="span">
+        <TrendText variant="body2">
           {trendValue} From The {period}
-        </Typography>
+        </TrendText>
       </TrendIndicator>
     </CardContainer>
   );

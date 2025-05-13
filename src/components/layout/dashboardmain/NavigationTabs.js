@@ -1,42 +1,51 @@
 import React, { useState } from 'react';
-import { Box, Tabs, Tab, styled } from '@mui/material';
+import { Box, Tabs, Tab } from '@mui/material';
+import styled from 'styled-components';
 
-const StyledTabs = styled(Tabs)({
-  minHeight: 48,
-  '& .MuiTabs-indicator': {
-    display: 'none',
-  },
-});
+const TabsContainer = styled(Box)`
+  width: 100%;
+  background-color: ${props => props.theme.colors.background.paper};
+  margin-bottom: ${props => props.theme.spacing(3)};
+`;
 
-const StyledTab = styled(Tab)(({ theme }) => ({
-  textTransform: 'none',
-  minWidth: 0,
-  padding: '12px 16px',
-  borderRadius: '4px',
-  marginRight: '8px',
-  color: theme.palette.text.primary,
-  fontWeight: theme.typography.fontWeightRegular,
-  '&.Mui-selected': {
-    color: '#673ab7',
-    fontWeight: theme.typography.fontWeightMedium,
-    backgroundColor: 'rgba(103, 58, 183, 0.1)',
-  },
-}));
-
-const HighlightedTab = styled(StyledTab)(({ theme }) => ({
-  border: '2px dashed #673ab7',
-  position: 'relative',
-  '&::after': {
-    content: '"92 Hug × 22 Hug"',
-    position: 'absolute',
-    bottom: '-20px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    fontSize: '10px',
-    color: '#673ab7',
-    whiteSpace: 'nowrap',
+const StyledTabs = styled(Tabs)`
+  min-height: 48px;
+  .MuiTabs-indicator {
+    display: none;
   }
-}));
+`;
+
+const StyledTab = styled(Tab)`
+  text-transform: none;
+  min-width: 0;
+  padding: ${props => `${props.theme.spacing(3)} ${props.theme.spacing(4)}`};
+  border-radius: ${props => props.theme.borderRadius.sm};
+  margin-right: ${props => props.theme.spacing(2)};
+  color: ${props => props.theme.colors.text.primary.dark};
+  font-weight: ${props => props.theme.typography.fontWeights.normal};
+  
+  &.Mui-selected {
+    color: ${props => props.theme.colors.primary.main};
+    font-weight: ${props => props.theme.typography.fontWeights.medium};
+    background-color: ${props => `${props.theme.colors.primary.main}1A`}; // 10% opacity
+  }
+`;
+
+const HighlightedTab = styled(StyledTab)`
+  border: 2px dashed ${props => props.theme.colors.primary.main};
+  position: relative;
+  
+  &::after {
+    content: "92 Hug × 22 Hug";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: ${props => props.theme.typography.fontSizes.xs};
+    color: ${props => props.theme.colors.primary.main};
+    white-space: nowrap;
+  }
+`;
 
 const NavigationTabs = () => {
   const [value, setValue] = useState(0);
@@ -46,7 +55,7 @@ const NavigationTabs = () => {
   };
 
   return (
-    <Box sx={{ width: '100%', bgcolor: 'background.paper', mb: 3 }}>
+    <TabsContainer>
       <StyledTabs
         value={value}
         onChange={handleChange}
@@ -62,7 +71,7 @@ const NavigationTabs = () => {
         <StyledTab label="Contacts" />
         <HighlightedTab label="Credit History" />
       </StyledTabs>
-    </Box>
+    </TabsContainer>
   );
 };
 

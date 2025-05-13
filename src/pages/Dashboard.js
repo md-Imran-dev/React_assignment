@@ -2,87 +2,63 @@ import React from "react";
 import Header from "../components/layout/Header";
 import MainSidebar from "../components/layout/sidebar/MainSidebar";
 import { Outlet } from "react-router-dom";
-import { Box, Container, CssBaseline, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import DashboardHeader from "../components/layout/dashboardmain/DashboardHeader";
-import { ThemeProvider } from "styled-components";
-import { createTheme } from "@mui/material/styles";
 import OrderStatusChart from "../components/layout/orders/OrderStatusChart";
 import RecentActivities from "../components/layout/activity/RecentActivities";
 import RecentOrders from "../components/layout/orders/RecentOrders";
 import RevenueDashboard from "../components/layout/dashboardmain/RevenueDashboard";
-const theme = createTheme({
-palette: {
-primary: {
-main: '#673ab7',
-},
-secondary: {
-main: '#ff4081',
-},
-background: {
-default: '#f5f7fa',
-paper: '#ffffff',
-},
-},
-typography: {
-fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-},
-components: {
-MuiButton: {
-styleOverrides: {
-root: {
-textTransform: 'none',
-},
-},
-},
-},
-});
+import styled from 'styled-components';
+
+const DashboardContainer = styled(Box)`
+  background-color: ${props => props.theme.colors.background.main};
+  min-height: 100vh;
+`;
+
+const ContentWrapper = styled(Box)`
+  flex-grow: 1;
+  padding: ${props => props.theme.spacing(3)};
+  background-color: ${props => props.theme.colors.background.paper};
+`;
+
+const StyledContainer = styled(Container)`
+  margin-top: ${props => props.theme.spacing(4)};
+  margin-bottom: ${props => props.theme.spacing(4)};
+`;
 
 const Dashboard = () => {
-return <div>
-<ThemeProvider theme={theme}>
-<Header/>
-<Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="flex-start">
-<MainSidebar/>
-<Box flexGrow={1} p={3}>
+  return (
+    <DashboardContainer>
+      <Header />
+      <Box display="flex">
+        <MainSidebar />
+        <ContentWrapper>
+          <DashboardHeader />
+          
+          <StyledContainer maxWidth="xl">
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={7}>
+                <OrderStatusChart />
+              </Grid>
+              <Grid item xs={12} md={5}>
+                <RecentActivities />
+              </Grid>
+            </Grid>
+          </StyledContainer>
 
+          <StyledContainer maxWidth="xl">
+            <RecentOrders />
+          </StyledContainer>
 
+          <StyledContainer maxWidth="xl">
+            <RevenueDashboard />
+          </StyledContainer>
 
-    <Outlet/>
-  </Box>
-
-  <CssBaseline />
-  <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 3 }}>
-    <DashboardHeader />
-    <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', }}>
-    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
-  <Grid container spacing={3}>
-    <Grid item xs={12} md={7}>
-      <OrderStatusChart />
-    </Grid>
-    <Grid item xs={12} md={5}>
-      <RecentActivities />
-    </Grid>
-  </Grid>
-</Container>
-</Box>
-<Box sx={{ bgcolor: 'background.default', minHeight: '100vh',  }}>
-    <Container maxWidth="xl">
-      <RecentOrders />
-    </Container>
-  </Box>
-  <Box sx={{ bgcolor: 'background.default', minHeight: '100vh',}}>
-    <Container maxWidth="xl">
-      <RevenueDashboard />
-    </Container>
-  </Box>
-  </Box>
-
-
-
-  </Box>
-
-</ThemeProvider> 
- </div>;
+          <Outlet />
+        </ContentWrapper>
+      </Box>
+    </DashboardContainer>
+  );
 };
 
 export default Dashboard;

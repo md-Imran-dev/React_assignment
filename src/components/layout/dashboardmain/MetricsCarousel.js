@@ -1,48 +1,73 @@
 import React, { useRef } from 'react';
-import { Box, Button, useTheme } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Box, Button } from '@mui/material';
+import styled from 'styled-components';
 import MetricCard from './MetricCard';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const CarouselContainer = styled(Box)({
-  position: 'relative',
-  width: '100%',
-  overflow: 'hidden',
-});
+const CarouselContainer = styled.div`
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+`;
 
-const CarouselContent = styled(Box)({
-  display: 'flex',
-  overflowX: 'auto',
-  scrollBehavior: 'smooth',
-  '&::-webkit-scrollbar': {
-    display: 'none',
-  },
-  msOverflowStyle: 'none',
-  scrollbarWidth: 'none',
-  padding: '8px 0',
-});
+const CarouselContent = styled.div`
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: ${props => props.theme.spacing(2)} 0;
+`;
 
-const NavigationButton = styled(Button)(({ theme }) => ({
-  position: 'absolute',
-  top: '50%',
-  transform: 'translateY(-50%)',
-  zIndex: 1,
-  minWidth: 36,
-  width: 36,
-  height: 36,
-  padding: 0,
-  borderRadius: '50%',
-  backgroundColor: 'white',
-  boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-  '&:hover': {
-    backgroundColor: '#f5f5f5',
-  },
-}));
+const NavigationButton = styled(Button)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: ${props => props.theme.borderRadius.round};
+  background-color: ${props => props.theme.colors.background.main};
+  box-shadow: ${props => props.theme.shadows.sm};
+  color: ${props => props.theme.colors.text.primary.dark};
+
+  &:hover {
+    background-color: ${props => props.theme.colors.gray['05']};
+  }
+
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
+`;
+
+const MetricCardWrapper = styled(Box)`
+  flex: 0 0 auto;
+  width: 85%;
+  margin-right: ${props => props.theme.spacing(2)};
+  
+  @media (min-width: ${props => props.theme.breakpoints.sm}) {
+    width: 45%;
+  }
+  
+  @media (min-width: ${props => props.theme.breakpoints.md}) {
+    width: 22%;
+  }
+  
+  max-width: 280px;
+`;
 
 const MetricsCarousel = () => {
   const scrollRef = useRef(null);
-  const theme = useTheme();
 
   const handleScrollLeft = () => {
     scrollRef.current.scrollBy({ left: -250, behavior: 'smooth' });
@@ -94,22 +119,14 @@ const MetricsCarousel = () => {
     <CarouselContainer>
       <NavigationButton
         onClick={handleScrollLeft}
-        sx={{ left: 0 }}
+        className="left"
       >
         <ArrowBackIosNewIcon fontSize="small" />
       </NavigationButton>
 
       <CarouselContent ref={scrollRef}>
         {metrics.map((metric, index) => (
-          <Box
-            key={index}
-            sx={{
-              flex: '0 0 auto',
-              width: { xs: '85%', sm: '45%', md: '22%' },
-              maxWidth: 280,
-              mr: 2,
-            }}
-          >
+          <MetricCardWrapper key={index}>
             <MetricCard
               title={metric.title}
               value={metric.value}
@@ -117,13 +134,13 @@ const MetricsCarousel = () => {
               trendDirection={metric.trendDirection}
               period={metric.period}
             />
-          </Box>
+          </MetricCardWrapper>
         ))}
       </CarouselContent>
 
       <NavigationButton
         onClick={handleScrollRight}
-        sx={{ right: 0 }}
+        className="right"
       >
         <ArrowForwardIosIcon fontSize="small" />
       </NavigationButton>
