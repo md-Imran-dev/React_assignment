@@ -17,6 +17,12 @@ const MainContainer = styled.div`
   height: auto;
 `;
 
+// Common styles for all input fields
+const inputStyles = {
+  '& .MuiInputBase-input': {
+    fontSize: '14px'
+  }
+};
 
 const BusinessDetailsForm = () => {
   const [formData, setFormData] = useState({
@@ -57,19 +63,19 @@ const BusinessDetailsForm = () => {
   return (
     <MainContainer>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h6" fontWeight="bold">
+        <Typography variant="h6" fontWeight="bold" fontSize="16px">
           Business Details
         </Typography>
         
         <Button
           startIcon={<SaveIcon height={14} width={14} />}
-        >
+        style={{fontSize: '14px' }}>
           Save & Close
         </Button>
       </Box>
       
       <Box sx={{ mb: 3 }}>
-        <Typography variant="subtitle2" gutterBottom>
+        <Typography variant="subtitle2" gutterBottom fontWeight="bold" fontSize="12px">
           Account Name
         </Typography>
         <TextField
@@ -78,11 +84,12 @@ const BusinessDetailsForm = () => {
           onChange={(e) => setFormData({ ...formData, accountName: e.target.value })}
           variant="outlined"
           size="small"
+          sx={inputStyles}
         />
       </Box>
       
       <Box sx={{ mb: 3 }}>
-        <Typography variant="subtitle2" gutterBottom>
+        <Typography variant="subtitle2" gutterBottom fontWeight="bold" fontSize="12px">
           Email
         </Typography>
         <TextField
@@ -91,12 +98,13 @@ const BusinessDetailsForm = () => {
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           variant="outlined"
           size="small"
+          sx={inputStyles}
         />
       </Box>
       
       <Box sx={{ mb: 3 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom fontWeight="bold" fontSize="12px">
             Phone Number
           </Typography>
           <IconButton
@@ -118,7 +126,7 @@ const BusinessDetailsForm = () => {
       </Box>
       
       <Box>
-        <Typography variant="subtitle2" gutterBottom>
+        <Typography variant="subtitle2" gutterBottom fontWeight="bold" fontSize="12px">
           Contact Owner
         </Typography>
         <TextField
@@ -128,6 +136,7 @@ const BusinessDetailsForm = () => {
           onChange={(e) => setFormData({ ...formData, contactOwner: e.target.value })}
           variant="outlined"
           size="small"
+          sx={inputStyles}
           SelectProps={{
             IconComponent: KeyboardArrowDownIcon,
             native: false,

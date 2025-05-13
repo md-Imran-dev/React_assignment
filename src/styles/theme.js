@@ -1,3 +1,50 @@
+const globalComponentOverrides = {
+  MuiInputBase: {
+    styleOverrides: {
+      input: {
+        fontSize: '14px',
+      },
+    },
+  },
+  MuiSelect: {
+    styleOverrides: {
+      select: {
+        fontSize: '14px',
+      },
+    },
+  },
+  MuiMenuItem: {
+    styleOverrides: {
+      root: {
+        fontSize: '14px',
+      },
+    },
+  },
+  MuiOutlinedInput: {
+    styleOverrides: {
+      input: {
+        fontSize: '14px',
+      },
+    },
+  },
+  MuiInput: {
+    styleOverrides: {
+      input: {
+        fontSize: '14px',
+      },
+    },
+  },
+  MuiTextField: {
+    styleOverrides: {
+      root: {
+        '& .MuiInputBase-input': {
+          fontSize: '14px',
+        },
+      },
+    },
+  },
+};
+
 const lightTheme = {
   mode: 'light',
   colors: {
@@ -128,7 +175,10 @@ const lightTheme = {
     fast: '150ms ease-in-out',
     normal: '300ms ease-in-out',
     slow: '500ms ease-in-out',
-  }
+  },
+  
+  // MUI component overrides
+  components: globalComponentOverrides,
 };
 
 const darkTheme = {
@@ -174,6 +224,7 @@ const darkTheme = {
     lg: '0px 8px 16px rgba(0, 0, 0, 0.3)',
     xl: '0px 12px 24px rgba(0, 0, 0, 0.4)',
   },
+  components: globalComponentOverrides,
 };
 
 export { lightTheme, darkTheme }; 

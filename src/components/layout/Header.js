@@ -53,6 +53,7 @@ const StyledInputBase = styled(InputBase)`
     padding: ${props => props.theme.spacing(1)};
     padding-left:  ${props => props.theme.spacing(3)};
     width: 100%;
+    font-size: 14px;
     
     @media (min-width: ${props => props.theme.breakpoints.md}) {
       width: 50ch;
