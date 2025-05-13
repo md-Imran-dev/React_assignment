@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import {
-  AppBar,
   Box,
   Toolbar,
   IconButton,

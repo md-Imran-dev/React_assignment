@@ -30,7 +30,7 @@ const Dashboard = () => {
   return (
     <DashboardContainer>
       <Header />
-      <Box display="flex">
+      <Box display="flex" sx={{ padding: '16px 16px 0 16px' }}>
         <MainSidebar />
         <ContentWrapper>
           <DashboardHeader />
