@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Menu, MenuItem, Button, IconButton } from '@mui/material';
+import { Menu, MenuItem,} from '@mui/material';
 
 // Main container with correct flex properties
 const AccountHeaderContainer = styled.div`
@@ -9,7 +9,7 @@ const AccountHeaderContainer = styled.div`
   align-items: flex-start;
   gap: 16px;
   align-self: stretch;
-  background: ${props => props.theme.colors.background.main};
+  background-color: ${props => props.theme.colors.background.card};
   border: 1px solid ${props => props.theme.colors.border.card};
   border-radius: 24px;
 `;

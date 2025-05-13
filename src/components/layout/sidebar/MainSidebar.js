@@ -11,6 +11,7 @@ function MainSidebar() {
       flexDirection: 'column',
       width: '390px',
       gap: '16px',
+      marginRight: '12px',
     }}>
       <ProfileHeader />
       <QuickActions />
