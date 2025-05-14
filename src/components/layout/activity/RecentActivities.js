@@ -60,6 +60,14 @@ const StyledTabs = styled(Tabs)({
   },
 });
 
+const ScrollableList = styled(List)`
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+`;
+
 const activities = [
   {
     id: 1,
@@ -209,7 +217,7 @@ const RecentActivities = () => {
         </StyledTabs>
       </HeaderContainer>
 
-      <List sx={{ p: 0, maxHeight: 370, overflow: "auto" }}>
+      <ScrollableList sx={{ p: 0, maxHeight: 370, overflow: "auto" }}>
         {Object.keys(groupedActivities).map((date) => (
           <Box key={date}>
             <DateLabel
@@ -313,7 +321,7 @@ const RecentActivities = () => {
             ))}
           </Box>
         ))}
-      </List>
+      </ScrollableList>
     </Paper>
   );
 };
