@@ -22,6 +22,7 @@ const ContentWrapper = styled(Box)`
   padding-left: ${props => props.theme.spacing(3)};
   padding-right: ${props => props.theme.spacing(3)};
   background-color: ${props => props.theme.colors.background.card};
+  border-left: 1px solid ${props => props.theme.colors.border.card};
   overflow-x: hidden;
   width: 100%;
 `;
@@ -41,7 +42,7 @@ const Dashboard = () => {
       <Box display="flex" sx={{ flex: 1, padding: '16px 16px 0 16px', overflow: 'hidden' }}>
         <MainSidebar />
         <Box display="flex" flexDirection="column" sx={{ flexGrow: 1, width: '100%', overflow: 'hidden' }}>
-          <div className="tabs-container">
+          <div>
             {tabs.map(tab => (
               <button
                 key={tab}
