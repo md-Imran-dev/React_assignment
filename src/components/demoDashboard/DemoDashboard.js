@@ -2,6 +2,7 @@ import React from 'react';
 import './DemoDashboard.css';
 import { FaChevronLeft, FaChevronRight, } from 'react-icons/fa';
 import styled from 'styled-components';
+import { orderMetrics } from '../../data/orderData';
 
 const MainContainer = styled.div`
   background-color: #f5f5f7;
@@ -50,77 +51,16 @@ const CardIconInner = styled.div`
   height: 54px;
 `;
 
+const CardBottom = styled.div`
+ display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 25px;
+  padding: 14px 22px 16px 22px;
+`;
+
 
 const DemoDashboard = () => {
-
-  const metrics = [
-    {
-      title: 'Total Orders',
-      value: '123',
-      icon: '❤️',
-      bgColor: '#ffe9f1',
-      iconColor: '#e91e63',
-      change: 28,
-      isPositive: true
-    },
-    {
-      title: 'Total Taken',
-      value: '123',
-      icon: '👥',
-      bgColor: '#f3e5f5',
-      iconColor: '#9c27b0',
-      change: 15,
-      isPositive: false
-    },
-    {
-      title: 'Total Revenue',
-      value: '123',
-      icon: '🍔',
-      bgColor: '#fff3e0',
-      iconColor: '#ff6d00',
-      change: 28,
-      isPositive: true
-    },
-    {
-      title: 'Pending Orders',
-      value: '$1234.99',
-      icon: '⏱️',
-      bgColor: '#ffebee',
-      iconColor: '#f44336',
-      change: 28,
-      isPositive: true
-    },
-    {
-      title: 'Pending Returns',
-      value: '$1234.99',
-      icon: '🔄',
-      bgColor: '#f3e5f5',
-      iconColor: '#9c27b0',
-      change: 28,
-      isPositive: true
-    },
-    {
-      title: 'Pending Orders',
-      value: '$1234.99',
-      icon: '⏱️',
-      bgColor: '#ffebee',
-      iconColor: '#f44336',
-      change: 28,
-      isPositive: true
-    },
-    {
-      title: 'Pending Returns',
-      value: '$1234.99',
-      icon: '🔄',
-      bgColor: '#f3e5f5',
-      iconColor: '#9c27b0',
-      change: 28,
-      isPositive: true
-    }
-  ];
-
-
-
   return (
     <MainContainer >
       <InnerContainer >
@@ -129,7 +69,7 @@ const DemoDashboard = () => {
 
 
           <div className="metrics-scroll-area">
-            {metrics.map((metric, index) => (
+            {orderMetrics.map((metric, index) => (
               <Card key={index}>
                 {/* --- TOP PART --- */}
                 <CardTop>
@@ -144,7 +84,7 @@ const DemoDashboard = () => {
                   </div>
                 </CardTop>
                 {/* --- BOTTOM PART --- */}
-                <div className="metric-card-bottom">
+                <CardBottom>
                   {metric.percent !== undefined && metric.status &&
                     <span className={`metric-change ${metric.status === "Up" || metric.isPositive ? "positive" : "negative"}`}>
                       <span className="arrow">{metric.status === "Up" || metric.isPositive ? "↑" : "↓"}</span>
@@ -154,7 +94,7 @@ const DemoDashboard = () => {
                   <span className="metric-period">
                     {metric.period || "From The Last Month"}
                   </span>
-                </div>
+                </CardBottom>
               </Card>
             ))}
           </div>

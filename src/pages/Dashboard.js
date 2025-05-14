@@ -13,6 +13,8 @@ import DemoDashboard from "../components/demoDashboard/DemoDashboard";
 const DashboardContainer = styled(Box)`
   background-color: ${props => props.theme.colors.background.main};
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ContentWrapper = styled(Box)`
@@ -20,6 +22,8 @@ const ContentWrapper = styled(Box)`
   padding-left: ${props => props.theme.spacing(3)};
   padding-right: ${props => props.theme.spacing(3)};
   background-color: ${props => props.theme.colors.background.card};
+  overflow-x: hidden;
+  width: 100%;
 `;
 
 const StyledContainer = styled(Container)`
@@ -34,9 +38,9 @@ const Dashboard = () => {
   return (
     <DashboardContainer>
       <Header />
-      <Box display="flex" sx={{ padding: '16px 16px 0 16px' }}>
+      <Box display="flex" sx={{ flex: 1, padding: '16px 16px 0 16px', overflow: 'hidden' }}>
         <MainSidebar />
-        <div style={{ flexGrow: 1 }}>
+        <Box display="flex" flexDirection="column" sx={{ flexGrow: 1, width: '100%', overflow: 'hidden' }}>
           <div className="tabs-container">
             {tabs.map(tab => (
               <button
@@ -60,8 +64,6 @@ const Dashboard = () => {
               </Grid>
             </Grid>
 
-
-
             <StyledContainer maxWidth="xl">
               <RecentOrders />
             </StyledContainer>
@@ -72,7 +74,7 @@ const Dashboard = () => {
 
             <Outlet />
           </ContentWrapper>
-        </div>
+        </Box>
       </Box>
     </DashboardContainer>
   );
