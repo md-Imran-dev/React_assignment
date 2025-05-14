@@ -46,7 +46,7 @@ const CardIconInner = styled.div`
 `;
 
 const CardBottom = styled.div`
- display: flex;
+  display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 25px;

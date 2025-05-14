@@ -19,12 +19,17 @@ const DashboardContainer = styled(Box)`
 
 const ContentWrapper = styled(Box)`
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   padding-left: ${props => props.theme.spacing(3)};
   padding-right: ${props => props.theme.spacing(3)};
   background-color: ${props => props.theme.colors.background.card};
-  border-left: 1px solid ${props => props.theme.colors.border.card};
+  border: 1px solid ${props => props.theme.colors.border.card};
   overflow-x: hidden;
   width: 100%;
+  border-bottom-right-radius: 24px;
+  border-bottom-left-radius: 24px;
 `;
 
 const StyledContainer = styled(Container)`
@@ -41,7 +46,7 @@ const Dashboard = () => {
       <Header />
       <Box display="flex" sx={{ flex: 1, padding: '16px 16px 0 16px', overflow: 'hidden' }}>
         <MainSidebar />
-        <Box display="flex" flexDirection="column" sx={{ flexGrow: 1, width: '100%', overflow: 'hidden' }}>
+        <Box display="flex" flexDirection="column" sx={{ flexGrow: 1, width: '100%', overflow: 'hidden', marginBottom: '16px' }}>
           <div>
             {tabs.map(tab => (
               <button
@@ -57,10 +62,10 @@ const Dashboard = () => {
           <ContentWrapper>
             <DemoDashboard />
             <Grid container spacing={3}>
-              <Grid item xs={12} md={7}>
+              <Grid item xs={12} md={6}>
                 <OrderStatusChart />
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={6}>
                 <RecentActivities />
               </Grid>
             </Grid>

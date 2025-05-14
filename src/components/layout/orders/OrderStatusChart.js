@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  Box, 
-  Paper, 
-  Typography, 
-  Grid, 
-  Select, 
-  MenuItem, 
+import {
+  Box,
+  Paper,
+  Typography,
+  Grid,
+  Select,
+  MenuItem,
   IconButton
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -77,12 +77,12 @@ const OrderStatusChart = () => {
   ];
 
   return (
-    <Paper elevation={0} sx={{ borderRadius: 1, overflow: 'hidden' }}>
+    <Paper elevation={0} sx={{ borderRadius: 1, overflow: 'hidden', backgroundColor: 'red' }}>
       <HeaderContainer>
         <Typography variant="h6" fontWeight="medium">
           Order Status
         </Typography>
-        
+
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Select
             value={category}
@@ -90,7 +90,7 @@ const OrderStatusChart = () => {
             displayEmpty
             size="small"
             IconComponent={KeyboardArrowDownIcon}
-            sx={{ 
+            sx={{
               minWidth: 140,
               '.MuiOutlinedInput-notchedOutline': { borderColor: '#e0e0e0' }
             }}
@@ -99,14 +99,14 @@ const OrderStatusChart = () => {
             <MenuItem value="Electronics">Electronics</MenuItem>
             <MenuItem value="Clothing">Clothing</MenuItem>
           </Select>
-          
+
           <Select
             value={year}
             onChange={(e) => setYear(e.target.value)}
             displayEmpty
             size="small"
             IconComponent={KeyboardArrowDownIcon}
-            sx={{ 
+            sx={{
               minWidth: 90,
               '.MuiOutlinedInput-notchedOutline': { borderColor: '#e0e0e0' }
             }}
@@ -118,7 +118,7 @@ const OrderStatusChart = () => {
           </Select>
         </Box>
       </HeaderContainer>
-      
+
       <ContentContainer>
         <StatusContainer sx={{ width: '65%', flexDirection: 'row', flexWrap: 'wrap', borderRight: '1px solid #eee' }}>
           {statusData.map((status, index) => (
@@ -137,7 +137,7 @@ const OrderStatusChart = () => {
             </StatusItem>
           ))}
         </StatusContainer>
-        
+
         <ChartContainer sx={{ width: '35%' }}>
           <Box sx={{ position: 'relative', width: '180px', height: '180px' }}>
             <ResponsiveContainer width="100%" height="100%">
