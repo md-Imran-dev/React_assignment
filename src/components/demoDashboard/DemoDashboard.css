@@ -113,8 +113,8 @@
 
 .scroll-button {
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: none;
   background: white;
@@ -127,11 +127,11 @@
 }
 
 .scroll-button.left {
-  left: -18px;
+  left: -7px;
 }
 
 .scroll-button.right {
-  right: -18px;
+  right: -7px;
 }
 
 /* Main Grid */

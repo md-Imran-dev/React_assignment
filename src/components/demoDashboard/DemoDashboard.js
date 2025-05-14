@@ -93,7 +93,6 @@ const DemoDashboard = () => {
             style={{
               height: "16px",
               width: "16px",
-              backgroundColor: "#5b46e9",
             }}
           />
         </button>
