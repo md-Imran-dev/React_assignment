@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import styled from "styled-components";
 import ThemeContext from "../../../context/ThemeContext";
+import { red } from "@mui/material/colors";
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -33,8 +34,8 @@ const DateLabel = styled(Typography)(({ theme }) => ({
 }));
 
 const TimeText = styled(Typography)(({ theme }) => ({
-  fontSize: "0.75rem",
-  color: "text.secondary",
+  fontSize: "12px",
+  color: theme.colors.text.secondary,
   marginTop: "4px",
 }));
 
@@ -44,9 +45,12 @@ const StyledTab = styled(Tab)({
   fontWeight: "medium",
   padding: "10px 16px",
   color: "inherit",
+  transition: "all 0.2s ease",
+  height: "38px",
   "&.Mui-selected": {
     color: "#6B46C1",
     fontWeight: "bold",
+    backgroundColor: "rgba(107, 70, 193, 0.1)",
   },
 });
 
@@ -130,13 +134,16 @@ const groupByDate = (items) => {
 };
 
 const RecentActivities = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme, isDarkMode } = useContext(ThemeContext);
   const [view, setView] = useState(0);
   const groupedActivities = groupByDate(activities);
 
   const handleChange = (event, newValue) => {
     setView(newValue);
   };
+
+  // Get the active background color based on theme
+  const activeBackgroundColor = isDarkMode ? "#8378FF" : "#FFF";
 
   return (
     <Paper
@@ -150,20 +157,72 @@ const RecentActivities = () => {
       }}
     >
       <HeaderContainer>
-        <Typography variant="h6" fontWeight="medium">
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: "18px",
+            fontStyle: "normal",
+            fontWeight: "600",
+            lineHeight: "24px",
+            color: theme.colors.text.primary,
+            padding: "10px",
+          }}
+        >
           Recent Activities
         </Typography>
 
-        <StyledTabs value={view} onChange={handleChange}>
-          <StyledTab label="MESSAGE" />
-          <StyledTab label="EMAIL" />
+        <StyledTabs
+          value={view}
+          onChange={handleChange}
+          sx={{
+            border: `1px solid ${theme.colors.border.card}`,
+            borderRadius: "24px",
+            height: "38px",
+          }}
+        >
+          <StyledTab
+            label="Message"
+            sx={{
+              borderRadius: "20px",
+              "&.Mui-selected": {
+                backgroundColor: activeBackgroundColor,
+                color: theme.colors.primary.main,
+                height: "38px",
+                fontSize: "14px",
+                fontWeight: "500",
+              },
+            }}
+          />
+          <StyledTab
+            label="Email"
+            sx={{
+              borderRadius: "20px",
+              "&.Mui-selected": {
+                backgroundColor: activeBackgroundColor,
+                color: theme.colors.primary.main,
+                height: "38px",
+                fontSize: "14px",
+                fontWeight: "500",
+              },
+            }}
+          />
         </StyledTabs>
       </HeaderContainer>
 
       <List sx={{ p: 0, maxHeight: 370, overflow: "auto" }}>
         {Object.keys(groupedActivities).map((date) => (
           <Box key={date}>
-            <DateLabel>{date}</DateLabel>
+            <DateLabel
+              sx={{
+                color: theme.colors.text.primary,
+                fontSize: "12px",
+                fontWeight: "500",
+                lineHeight: "18px",
+                padding: "10px",
+              }}
+            >
+              {date}
+            </DateLabel>
 
             {groupedActivities[date].map((activity) => (
               <ActivityItem key={activity.id} alignItems="flex-start">
@@ -173,7 +232,7 @@ const RecentActivities = () => {
                       bgcolor: activity.color,
                       width: 36,
                       height: 36,
-                      fontSize: "1rem",
+                      fontSize: "10px",
                     }}
                   >
                     {activity.type === "message"
@@ -189,7 +248,11 @@ const RecentActivities = () => {
                     <Box component="span">
                       <Typography
                         component="span"
-                        sx={{ color: "#1976d2", fontWeight: "medium" }}
+                        sx={{
+                          color: theme.colors.text.primary,
+                          fontWeight: "medium",
+                          fontSize: "14px",
+                        }}
                       >
                         {activity.user}
                       </Typography>
@@ -200,7 +263,10 @@ const RecentActivities = () => {
                       {activity.recipient && (
                         <Typography
                           component="span"
-                          sx={{ color: "#1976d2", fontWeight: "medium" }}
+                          sx={{
+                            color: theme.colors.text.primary,
+                            fontWeight: "medium",
+                          }}
                         >
                           {activity.recipient}
                         </Typography>
@@ -208,7 +274,10 @@ const RecentActivities = () => {
                       {activity.source && (
                         <Typography
                           component="span"
-                          sx={{ color: "#1976d2", fontWeight: "medium" }}
+                          sx={{
+                            color: theme.colors.text.primary,
+                            fontWeight: "medium",
+                          }}
                         >
                           {activity.source}
                         </Typography>
@@ -216,13 +285,19 @@ const RecentActivities = () => {
                       {activity.content && (
                         <Typography
                           component="span"
-                          sx={{ fontWeight: "medium" }}
+                          sx={{
+                            fontWeight: "medium",
+                            fontSize: "14px",
+                          }}
                         >
                           {" "}
                           "
                           <Typography
                             component="span"
-                            sx={{ color: "#1976d2" }}
+                            sx={{
+                              color: theme.colors.text.primary,
+                              fontSize: "2px",
+                            }}
                           >
                             {activity.content}
                           </Typography>

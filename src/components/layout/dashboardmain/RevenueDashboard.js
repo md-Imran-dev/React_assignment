@@ -92,7 +92,7 @@ const DateButton = styled(Button)(({ theme }) => ({
 const RevenueDashboard = () => {
   const [view, setView] = useState("revenue");
   const [category, setCategory] = useState("All Categories");
-  const { theme } = useContext(ThemeContext);
+  const { theme, isDarkMode } = useContext(ThemeContext);
   const handleViewChange = (event, newView) => {
     if (newView !== null) {
       setView(newView);
@@ -117,6 +117,7 @@ const RevenueDashboard = () => {
           justifyContent: "space-between",
           alignItems: "center",
           mb: 4,
+          borderBottom: `1px solid ${theme.colors.border.card}`,
         }}
       >
         <StyledToggleButtonGroup
@@ -125,6 +126,13 @@ const RevenueDashboard = () => {
           onChange={handleViewChange}
           aria-label="view selector"
           size="small"
+          sx={{
+            "& .MuiToggleButton-root": {
+              fontSize: "12px",
+              fontWeight: 400,
+              lineHeight: "18px",
+            },
+          }}
         >
           <ToggleButton value="revenue" aria-label="revenue view">
             Revenue
@@ -137,7 +145,7 @@ const RevenueDashboard = () => {
           </ToggleButton>
         </StyledToggleButtonGroup>
 
-        <Box sx={{ display: "flex", gap: 1 }}>
+        <Box sx={{ display: "flex", gap: 1, paddingBottom: "10px" }}>
           <StyledSelect
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -151,7 +159,24 @@ const RevenueDashboard = () => {
             <MenuItem value="Clothing">Clothing</MenuItem>
           </StyledSelect>
 
-          <DateButton endIcon={<CalendarMonthIcon />}>Jun 2023</DateButton>
+          <DateButton
+            sx={{
+              color: isDarkMode ? "white" : "#0E253C",
+              fontSize: "12px",
+              backgroundColor: theme.colors.background.card,
+              border: `1px solid ${theme.colors.border.card}`,
+            }}
+            endIcon={
+              <CalendarMonthIcon
+                sx={{
+                  color: isDarkMode ? "white" : "#0E253C",
+                  fontSize: "12px",
+                }}
+              />
+            }
+          >
+            Jun 2023
+          </DateButton>
         </Box>
       </Box>
 
@@ -162,14 +187,23 @@ const RevenueDashboard = () => {
           justifyContent: "space-between",
           alignItems: "center",
           mb: 2,
+          color: theme.colors.text.primary,
         }}
       >
-        <Typography variant="h6" fontWeight="medium">
+        <Typography
+          variant="h6"
+          fontWeight="medium"
+          sx={{ color: theme.colors.text.primary, fontSize: "18px" }}
+        >
           Revenue
         </Typography>
         <Typography variant="subtitle1">
           Total Revenue:{" "}
-          <Box component="span" fontWeight="bold" color="#1a237e">
+          <Box
+            component="span"
+            fontWeight="bold"
+            color={theme.colors.text.primary}
+          >
             ${"89,235.89"}
           </Box>
         </Typography>
@@ -219,6 +253,7 @@ const RevenueDashboard = () => {
                       fill="#666"
                       textAnchor="middle"
                       fontSize={12}
+                      color={theme.colors.text.primary}
                     >
                       ${value.toFixed(2)}
                     </text>
@@ -235,7 +270,12 @@ const RevenueDashboard = () => {
         <Typography
           variant="body2"
           color="text.secondary"
-          sx={{ display: "flex", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            color: theme.colors.text.primary,
+            fontSize: "12px",
+          }}
         >
           • 2023
         </Typography>

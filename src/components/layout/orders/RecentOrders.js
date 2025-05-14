@@ -123,10 +123,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
-  padding: "16px",
+  padding: "0 16px",
   borderBottom: `1px solid ${theme.colors.border.card}`,
   color: theme.colors.text.secondary,
   fontWeight: 500,
+  fontSize: "12px",
+  height: "40px",
 }));
 
 const QuantityLabel = styled(Typography)(({ theme }) => ({
@@ -168,7 +170,15 @@ const RecentOrders = () => {
       }}
     >
       <Box sx={{ p: 3, pb: 1 }}>
-        <Typography variant="h6" fontWeight="bold">
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          sx={{
+            color: theme.colors.text.primary,
+            fontSize: "18px",
+            padding: "12px 12px 12px 16px",
+          }}
+        >
           Recent Orders
         </Typography>
       </Box>
@@ -176,7 +186,12 @@ const RecentOrders = () => {
       <TableContainer>
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
-            <TableRow style={{ backgroundColor: theme.colors.background.card }}>
+            <TableRow
+              style={{
+                backgroundColor: theme.colors.background.card,
+                fontSize: "12px",
+              }}
+            >
               <StyledTableHeadCell>ORDER ID</StyledTableHeadCell>
               <StyledTableHeadCell>PRODUCTS</StyledTableHeadCell>
               <StyledTableHeadCell>CUSTOMER</StyledTableHeadCell>
@@ -191,7 +206,11 @@ const RecentOrders = () => {
                 <StyledTableCell>{order.id}</StyledTableCell>
                 <StyledTableCell>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <QuantityLabel>x{order.quantity}</QuantityLabel>
+                    <QuantityLabel
+                      sx={{ color: theme.colors.text.secondary, gap: "4px" }}
+                    >
+                      x{order.quantity}
+                    </QuantityLabel>
                     <ProductWrapper>
                       <Avatar
                         variant="rounded"
@@ -250,12 +269,9 @@ const RecentOrders = () => {
             <ArrowForwardIcon
               fontSize="small"
               sx={{
-                bgcolor: "primary.main",
-                color: "white",
-                borderRadius: "50%",
-                p: 0.3,
-                width: 16,
-                height: 16,
+                fontSize: "12px",
+                fontWeight: 400,
+                lineHeight: "18px",
               }}
             />
           }
