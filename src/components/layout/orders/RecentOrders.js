@@ -13,7 +13,7 @@ import {
   Chip,
   Button,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import styled from "styled-components";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ThemeContext from "../../../context/ThemeContext";
 
@@ -119,18 +119,18 @@ const orders = [
 // Styled components
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   padding: "16px",
-  borderBottom: "1px solid #f0f0f0",
+  borderBottom: `1px solid ${theme.colors.border.card}`,
 }));
 
 const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
   padding: "16px",
-  borderBottom: "1px solid #f0f0f0",
-  color: theme.palette.text.secondary,
+  borderBottom: `1px solid ${theme.colors.border.card}`,
+  color: theme.colors.text.secondary,
   fontWeight: 500,
 }));
 
 const QuantityLabel = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary,
+  color: theme.colors.text.secondary,
   marginRight: theme.spacing(1),
 }));
 
@@ -152,7 +152,7 @@ const ViewMoreButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(2),
   marginBottom: theme.spacing(2),
   textTransform: "none",
-  color: theme.palette.primary.main,
+  color: theme.colors.primary.main,
 }));
 
 const RecentOrders = () => {
@@ -164,6 +164,7 @@ const RecentOrders = () => {
         borderRadius: 2,
         overflow: "hidden",
         border: `1px solid ${theme.colors.border.card}`,
+        backgroundColor: theme.colors.background.main,
       }}
     >
       <Box sx={{ p: 3, pb: 1 }}>

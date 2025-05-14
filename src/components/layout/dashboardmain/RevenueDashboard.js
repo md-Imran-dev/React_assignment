@@ -106,7 +106,8 @@ const RevenueDashboard = () => {
         borderRadius: 3,
         overflow: "hidden",
         p: 3,
-        border: "1px solid #eaeaea",
+        border: `1px solid ${theme.colors.border.card}`,
+        backgroundColor: theme.colors.background.main,
       }}
     >
       {/* Toggle buttons and filters */}

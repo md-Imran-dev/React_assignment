@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Header from "../components/layout/Header";
 import MainSidebar from "../components/layout/sidebar/MainSidebar";
 import { Outlet } from "react-router-dom";
-import { Box, Container, Grid } from "@mui/material";
-import OrderStatusChart from "../components/layout/orders/OrderStatusChart";
+import { Box, Container, Grid, Paper } from "@mui/material";
+import OrderStatusCard from "../components/layout/orders/OrderStatusCard";
 import RecentActivities from "../components/layout/activity/RecentActivities";
 import RecentOrders from "../components/layout/orders/RecentOrders";
 import RevenueDashboard from "../components/layout/dashboardmain/RevenueDashboard";
@@ -79,7 +79,7 @@ const Dashboard = () => {
               sx={{ width: "100%" }}
             >
               <Box sx={{ flex: "1 1 calc(50% - 8px)", minWidth: "300px" }}>
-                <OrderStatusChart />
+                <OrderStatusCard />
               </Box>
               <Box sx={{ flex: "1 1 calc(50% - 8px)", minWidth: "300px" }}>
                 <RecentActivities />
