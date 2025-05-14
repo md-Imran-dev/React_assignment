@@ -16,6 +16,7 @@ const DashboardContainer = styled(Box)`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const ContentWrapper = styled(Box)`
@@ -31,11 +32,40 @@ const ContentWrapper = styled(Box)`
   width: 100%;
   border-bottom-right-radius: 24px;
   border-bottom-left-radius: 24px;
+
+  @media (max-width: 767px) {
+    padding-left: ${(props) => props.theme.spacing(1.5)};
+    padding-right: ${(props) => props.theme.spacing(1.5)};
+  }
 `;
 
 const StyledContainer = styled(Container)`
   margin-top: ${(props) => props.theme.spacing(4)};
   margin-bottom: ${(props) => props.theme.spacing(4)};
+`;
+
+const ResponsiveBox = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+`;
+
+const CardContainer = styled(Box)`
+  flex: 1 1 calc(50% - 8px);
+  min-width: 300px;
+
+  @media (max-width: 767px) {
+    flex: 1 1 100%;
+    min-width: 100%;
+    margin-bottom: 12px;
+  }
 `;
 
 const Dashboard = () => {
@@ -62,7 +92,14 @@ const Dashboard = () => {
           overflow: "hidden",
         }}
       >
-        <MainSidebar sx={{ display: { xs: "none", sm: "block" } }} />
+        <MainSidebar
+          sx={{
+            display: { xs: "none", sm: "block" },
+            "@media (max-width: 767px)": {
+              display: "none",
+            },
+          }}
+        />
         <Box
           display="flex"
           flexDirection="column"
@@ -76,37 +113,24 @@ const Dashboard = () => {
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
           <ContentWrapper>
             <DemoDashboard />
-            <Box
-              display="flex"
-              flexDirection={{ xs: "column", md: "row" }}
-              flexWrap="wrap"
-              gap={{ xs: 1, sm: 1.5, md: 2 }}
-              sx={{ width: "100%" }}
-            >
-              <Box
-                sx={{
-                  flex: { xs: "1 1 100%", md: "1 1 calc(50% - 8px)" },
-                  minWidth: { xs: "100%", sm: "300px" },
-                  mb: { xs: 1, md: 0 },
-                }}
-              >
+            <ResponsiveBox>
+              <CardContainer>
                 <OrderStatusCard />
-              </Box>
-              <Box
-                sx={{
-                  flex: { xs: "1 1 100%", md: "1 1 calc(50% - 8px)" },
-                  minWidth: { xs: "100%", sm: "300px" },
-                }}
-              >
+              </CardContainer>
+              <CardContainer>
                 <RecentActivities />
-              </Box>
-            </Box>
+              </CardContainer>
+            </ResponsiveBox>
             <StyledContainer
               maxWidth="xl"
               sx={{
                 px: { xs: 1, sm: 2 },
                 mt: { xs: 2, sm: 3, md: 4 },
                 mb: { xs: 2, sm: 3, md: 4 },
+                "@media (max-width: 767px)": {
+                  padding: "0 !important",
+                  margin: "8px 0 !important",
+                },
               }}
             >
               <RecentOrders />
@@ -118,6 +142,10 @@ const Dashboard = () => {
                 px: { xs: 1, sm: 2 },
                 mt: { xs: 2, sm: 3, md: 4 },
                 mb: { xs: 2, sm: 3, md: 4 },
+                "@media (max-width: 767px)": {
+                  padding: "0 !important",
+                  margin: "8px 0 !important",
+                },
               }}
             >
               <RevenueDashboard />

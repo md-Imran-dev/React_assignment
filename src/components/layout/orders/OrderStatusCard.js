@@ -20,6 +20,12 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   padding: theme.spacing(2, 2),
   borderBottom: `1px solid ${theme.colors.border.card}`,
+
+  "@media (max-width: 767px)": {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "10px",
+  },
 }));
 
 const StatusGrid = styled(Box)(({ theme }) => ({
@@ -27,6 +33,11 @@ const StatusGrid = styled(Box)(({ theme }) => ({
   gridTemplateColumns: "1fr 1fr",
   gridTemplateRows: "repeat(3, 1fr)",
   flex: "1 1 65%",
+
+  "@media (max-width: 767px)": {
+    flex: "1 1 100%",
+    width: "100%",
+  },
 }));
 
 const StatusItem = styled(Box)(({ theme }) => ({
@@ -36,6 +47,10 @@ const StatusItem = styled(Box)(({ theme }) => ({
   padding: "32px 20px",
   borderBottom: `1px solid ${theme.colors.border.card}`,
   gap: 10,
+
+  "@media (max-width: 767px)": {
+    padding: "20px 16px",
+  },
 }));
 
 const StatusIcon = styled(Box)(({ color }) => ({
@@ -54,11 +69,21 @@ const ChartContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   padding: theme.spacing(2),
   flex: "1 1 35%",
+
+  "@media (max-width: 767px)": {
+    flex: "1 1 100%",
+    width: "100%",
+    padding: theme.spacing(3, 2, 4, 2),
+  },
 }));
 
 const ContentContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
+
+  "@media (max-width: 767px)": {
+    flexDirection: "column",
+  },
 }));
 
 // Colors matching the Figma design
@@ -140,7 +165,16 @@ const OrderStatusCard = () => {
           Order Status
         </Typography>
 
-        <Box sx={{ display: "flex", gap: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            "@media (max-width: 767px)": {
+              width: "100%",
+              justifyContent: "space-between",
+            },
+          }}
+        >
           <Select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -148,7 +182,7 @@ const OrderStatusCard = () => {
             size="small"
             IconComponent={KeyboardArrowDownIcon}
             sx={{
-              minWidth: 140,
+              minWidth: { xs: 110, sm: 140 },
               ".MuiOutlinedInput-notchedOutline": { borderColor: "#e0e0e0" },
               fontSize: "14px",
             }}
@@ -165,7 +199,7 @@ const OrderStatusCard = () => {
             size="small"
             IconComponent={KeyboardArrowDownIcon}
             sx={{
-              minWidth: 100,
+              minWidth: { xs: 90, sm: 100 },
               ".MuiOutlinedInput-notchedOutline": { borderColor: "#e0e0e0" },
               fontSize: "14px",
             }}
@@ -223,7 +257,15 @@ const OrderStatusCard = () => {
         </StatusGrid>
 
         <ChartContainer>
-          <Box sx={{ position: "relative", width: "180px", height: "180px" }}>
+          <Box
+            sx={{
+              position: "relative",
+              width: { xs: "100%", sm: "180px" },
+              height: { xs: "180px", sm: "180px" },
+              maxWidth: "220px",
+              margin: "0 auto",
+            }}
+          >
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
