@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/layout/Header";
 import MainSidebar from "../components/layout/sidebar/MainSidebar";
 import { Outlet } from "react-router-dom";
 import { Box, Container, Grid } from "@mui/material";
-import DashboardHeader from "../components/layout/dashboardmain/DashboardHeader";
 import OrderStatusChart from "../components/layout/orders/OrderStatusChart";
 import RecentActivities from "../components/layout/activity/RecentActivities";
 import RecentOrders from "../components/layout/orders/RecentOrders";
 import RevenueDashboard from "../components/layout/dashboardmain/RevenueDashboard";
 import styled from 'styled-components';
+import DemoDashboard from "../components/demoDashboard/DemoDashboard";
 
 const DashboardContainer = styled(Box)`
   background-color: ${props => props.theme.colors.background.main};
@@ -17,8 +17,9 @@ const DashboardContainer = styled(Box)`
 
 const ContentWrapper = styled(Box)`
   flex-grow: 1;
-  padding: ${props => props.theme.spacing(3)};
-  background-color: ${props => props.theme.colors.background.paper};
+  padding-left: ${props => props.theme.spacing(3)};
+  padding-right: ${props => props.theme.spacing(3)};
+  background-color: ${props => props.theme.colors.background.card};
 `;
 
 const StyledContainer = styled(Container)`
@@ -27,15 +28,29 @@ const StyledContainer = styled(Container)`
 `;
 
 const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState('Dashboard');
+  const tabs = ['Dashboard', 'Orders', 'Address', 'Notes', 'Tasks', 'Contacts', 'Credit History'];
+
   return (
     <DashboardContainer>
       <Header />
       <Box display="flex" sx={{ padding: '16px 16px 0 16px' }}>
         <MainSidebar />
-        <ContentWrapper>
-          <DashboardHeader />
-          
-          <StyledContainer maxWidth="xl">
+        <div style={{ flexGrow: 1 }}>
+          <div className="tabs-container">
+            {tabs.map(tab => (
+              <button
+                key={tab}
+                className={`tab${activeTab === tab ? ' active' : ''}`}
+                onClick={() => setActiveTab(tab)}
+                style={{ zIndex: activeTab === tab ? 2 : 1 }}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          <ContentWrapper>
+            <DemoDashboard />
             <Grid container spacing={3}>
               <Grid item xs={12} md={7}>
                 <OrderStatusChart />
@@ -44,20 +59,20 @@ const Dashboard = () => {
                 <RecentActivities />
               </Grid>
             </Grid>
-          </StyledContainer>
 
 
 
-          <StyledContainer maxWidth="xl">
-            <RecentOrders />
-          </StyledContainer>
+            <StyledContainer maxWidth="xl">
+              <RecentOrders />
+            </StyledContainer>
 
-          <StyledContainer maxWidth="xl">
-            <RevenueDashboard />
-          </StyledContainer>
+            <StyledContainer maxWidth="xl">
+              <RevenueDashboard />
+            </StyledContainer>
 
-          <Outlet />
-        </ContentWrapper>
+            <Outlet />
+          </ContentWrapper>
+        </div>
       </Box>
     </DashboardContainer>
   );

@@ -8,7 +8,9 @@ import {
   ListItemAvatar, 
   ListItemText, 
   Avatar, 
-  Button
+  Button,
+  Tabs,
+  Tab
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -34,6 +36,24 @@ const TimeText = styled(Typography)(({ theme }) => ({
   color: 'text.secondary',
   marginTop: '4px',
 }));
+
+const StyledTab = styled(Tab)({
+  textTransform: 'none',
+  minWidth: 80,
+  fontWeight: 'medium',
+  padding: '10px 16px',
+  color: 'inherit',
+  '&.Mui-selected': {
+    color: '#6B46C1',
+    fontWeight: 'bold',
+  },
+});
+
+const StyledTabs = styled(Tabs)({
+  '& .MuiTabs-indicator': {
+    display: 'none',
+  },
+});
 
 const activities = [
   {
@@ -109,8 +129,12 @@ const groupByDate = (items) => {
 };
 
 const RecentActivities = () => {
-  const [view, setView] = useState('message');
+  const [view, setView] = useState(0);
   const groupedActivities = groupByDate(activities);
+
+  const handleChange = (event, newValue) => {
+    setView(newValue);
+  };
 
   return (
     <Paper elevation={0} sx={{ borderRadius: 1, overflow: 'hidden', height: '100%' }}>
@@ -119,22 +143,10 @@ const RecentActivities = () => {
           Recent Activities
         </Typography>
         
-        <Box>
-          <Button 
-            color={view === 'message' ? 'primary' : 'inherit'}
-            onClick={() => setView('message')}
-            sx={{ fontWeight: view === 'message' ? 'bold' : 'normal', minWidth: 'auto' }}
-          >
-            Message
-          </Button>
-          <Button 
-            color={view === 'email' ? 'primary' : 'inherit'}
-            onClick={() => setView('email')}
-            sx={{ fontWeight: view === 'email' ? 'bold' : 'normal', minWidth: 'auto' }}
-          >
-            Email
-          </Button>
-        </Box>
+        <StyledTabs value={view} onChange={handleChange}>
+          <StyledTab label="MESSAGE" />
+          <StyledTab label="EMAIL" />
+        </StyledTabs>
       </HeaderContainer>
       
       <List sx={{ p: 0, maxHeight: 400, overflow: 'auto' }}>
@@ -145,13 +157,9 @@ const RecentActivities = () => {
             {groupedActivities[date].map((activity) => (
               <ActivityItem key={activity.id} alignItems="flex-start">
                 <ListItemAvatar>
-                  <Avatar sx={{ bgcolor: activity.color, width: 36, height: 36 }}>
-                    {activity.type === 'message' ? 
-                      <span className="material-icons-outlined" style={{ fontSize: '20px' }}>chat</span> : 
-                    activity.type === 'reply' ? 
-                      <span className="material-icons-outlined" style={{ fontSize: '20px' }}>forum</span> : 
-                      <span className="material-icons-outlined" style={{ fontSize: '20px' }}>shopping_cart</span>
-                    }
+                  <Avatar sx={{ bgcolor: activity.color, width: 36, height: 36, fontSize: '1rem' }}>
+                    {activity.type === 'message' ? 'chat' : 
+                     activity.type === 'reply' ? 'forum' : 'shopping_cart'}
                   </Avatar>
                 </ListItemAvatar>
                 

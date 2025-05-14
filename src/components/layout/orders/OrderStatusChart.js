@@ -24,16 +24,16 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
 const StatusContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
-  padding: theme.spacing(1.5, 0),
-  borderBottom: '1px solid #eee',
+  padding: theme.spacing(1, 0),
+  flexWrap: 'wrap',
 }));
 
 const StatusItem = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  flex: 1,
-  padding: theme.spacing(1),
+  flex: '0 0 16.666%',
+  padding: theme.spacing(0.5),
 }));
 
 const StatusIcon = styled(Box)(({ theme, color }) => ({
@@ -44,7 +44,7 @@ const StatusIcon = styled(Box)(({ theme, color }) => ({
   height: 36,
   borderRadius: '50%',
   backgroundColor: color || theme.palette.primary.main,
-  marginBottom: theme.spacing(1),
+  marginBottom: theme.spacing(0.5),
   color: 'white',
 }));
 
@@ -52,8 +52,13 @@ const ChartContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: theme.spacing(3),
-  height: '240px',
+  padding: theme.spacing(2),
+  height: '220px',
+}));
+
+const ContentContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
 }));
 
 const COLORS = ['#5e35b1', '#9575cd', '#3949ab', '#5c6bc0', '#43a047', '#e53935'];
@@ -114,56 +119,58 @@ const OrderStatusChart = () => {
         </Box>
       </HeaderContainer>
       
-      <StatusContainer>
-        {statusData.map((status, index) => (
-          <StatusItem key={index}>
-            <StatusIcon color={status.color}>
-              <span className="material-icons-outlined" style={{ fontSize: '20px' }}>
-                {status.icon}
-              </span>
-            </StatusIcon>
-            <Typography variant="body2" sx={{ mb: 0.5 }}>
-              {status.name}
-            </Typography>
-            <Typography variant="h6" fontWeight="bold">
-              {status.value}
-            </Typography>
-          </StatusItem>
-        ))}
-      </StatusContainer>
-      
-      <ChartContainer>
-        <Box sx={{ position: 'relative', width: '180px', height: '180px' }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={statusData}
-                innerRadius={60}
-                outerRadius={80}
-                paddingAngle={2}
-                dataKey="value"
-              >
-                {statusData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              textAlign: 'center'
-            }}
-          >
-            <Typography variant="h4" fontWeight="bold">
-              250
-            </Typography>
+      <ContentContainer>
+        <StatusContainer sx={{ width: '65%', flexDirection: 'row', flexWrap: 'wrap', borderRight: '1px solid #eee' }}>
+          {statusData.map((status, index) => (
+            <StatusItem key={index} sx={{ flex: '0 0 33.333%', borderBottom: index < 3 ? '1px solid #eee' : 'none' }}>
+              <StatusIcon color={status.color}>
+                <span className="material-icons-outlined" style={{ fontSize: '20px' }}>
+                  {status.icon}
+                </span>
+              </StatusIcon>
+              <Typography variant="body2" sx={{ mb: 0.5 }}>
+                {status.name}
+              </Typography>
+              <Typography variant="h6" fontWeight="bold">
+                {status.value}
+              </Typography>
+            </StatusItem>
+          ))}
+        </StatusContainer>
+        
+        <ChartContainer sx={{ width: '35%' }}>
+          <Box sx={{ position: 'relative', width: '180px', height: '180px' }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={statusData}
+                  innerRadius={60}
+                  outerRadius={80}
+                  paddingAngle={2}
+                  dataKey="value"
+                >
+                  {statusData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                textAlign: 'center'
+              }}
+            >
+              <Typography variant="h4" fontWeight="bold">
+                250
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-      </ChartContainer>
+        </ChartContainer>
+      </ContentContainer>
     </Paper>
   );
 };
