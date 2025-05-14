@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './DemoDashboard.css';
 import { FaChevronLeft, FaChevronRight, } from 'react-icons/fa';
 import styled from 'styled-components';
@@ -6,12 +6,10 @@ import { orderMetrics } from '../../data/orderData';
 
 const MainContainer = styled.div`
   background-color: #f5f5f7;
-  width: 100%;
   padding: 0 0 30px 0;
 `;
 
 const InnerContainer = styled.div`
-  width: 100%;
   background: #fff;
 `;
 
@@ -23,7 +21,7 @@ const Card = styled.div`
     display: flex;
     flex-direction: column;
     width: 250px;
-    overflow: hidden;
+    min-width: 250px;
 `;
 
 const CardTop = styled.div`
@@ -61,14 +59,27 @@ const CardBottom = styled.div`
 
 
 const DemoDashboard = () => {
+  const scrollRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
+
   return (
     <MainContainer >
       <InnerContainer >
         <div className="metrics-container">
-          <button className="scroll-button left"><FaChevronLeft /></button>
+          <button className="scroll-button left" onClick={scrollLeft}><FaChevronLeft /></button>
 
-
-          <div className="metrics-scroll-area">
+          <div className="metrics-scroll-area" ref={scrollRef}>
             {orderMetrics.map((metric, index) => (
               <Card key={index}>
                 {/* --- TOP PART --- */}
@@ -99,9 +110,7 @@ const DemoDashboard = () => {
             ))}
           </div>
 
-
-
-          <button className="scroll-button right"><FaChevronRight /></button>
+          <button className="scroll-button right" onClick={scrollRight}><FaChevronRight /></button>
         </div>
       </InnerContainer>
     </MainContainer>

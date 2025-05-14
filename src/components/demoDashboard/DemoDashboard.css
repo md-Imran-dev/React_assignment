@@ -47,9 +47,18 @@
 .metrics-scroll-area {
   display: flex;
   gap: 16px;
-  overflow-x: hidden;
+  overflow-x: auto;
   padding: 8px 4px;
   width: 100%;
+  scrollbar-width: none;
+  /* Firefox */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.metrics-scroll-area::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Edge */
 }
 
 .metric-card {
