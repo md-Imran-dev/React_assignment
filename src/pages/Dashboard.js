@@ -9,6 +9,7 @@ import RecentOrders from "../components/layout/orders/RecentOrders";
 import RevenueDashboard from "../components/layout/dashboardmain/RevenueDashboard";
 import styled from 'styled-components';
 import DemoDashboard from "../components/demoDashboard/DemoDashboard";
+import Tabs from "../components/layout/Tabs";
 
 const DashboardContainer = styled(Box)`
   background-color: ${props => props.theme.colors.background.main};
@@ -47,29 +48,17 @@ const Dashboard = () => {
       <Box display="flex" sx={{ flex: 1, padding: '16px 16px 0 16px', overflow: 'hidden' }}>
         <MainSidebar />
         <Box display="flex" flexDirection="column" sx={{ flexGrow: 1, width: '100%', overflow: 'hidden', marginBottom: '16px' }}>
-          <div>
-            {tabs.map(tab => (
-              <button
-                key={tab}
-                className={`tab${activeTab === tab ? ' active' : ''}`}
-                onClick={() => setActiveTab(tab)}
-                style={{ zIndex: activeTab === tab ? 2 : 1 }}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+          <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
           <ContentWrapper>
             <DemoDashboard />
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
+            <Box display="flex" flexDirection="row" flexWrap="wrap" gap={2} sx={{ width: '100%' }}>
+              <Box sx={{ flex: '1 1 calc(50% - 8px)', minWidth: '300px' }}>
                 <OrderStatusChart />
-              </Grid>
-              <Grid item xs={12} md={6}>
+              </Box>
+              <Box sx={{ flex: '1 1 calc(50% - 8px)', minWidth: '300px' }}>
                 <RecentActivities />
-              </Grid>
-            </Grid>
-
+              </Box>
+            </Box>
             <StyledContainer maxWidth="xl">
               <RecentOrders />
             </StyledContainer>

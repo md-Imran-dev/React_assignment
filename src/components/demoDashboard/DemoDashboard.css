@@ -86,18 +86,6 @@
   flex-direction: column;
 }
 
-.metric-title {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 4px;
-}
-
-.metric-value {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
 .metric-footer {
   display: flex;
   align-items: center;
@@ -306,9 +294,13 @@
 }
 
 .metric-period {
-  font-size: 15px;
-  color: #485061;
-  opacity: 0.75;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 19px; 
 }
 
 

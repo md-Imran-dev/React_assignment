@@ -77,7 +77,7 @@ const OrderStatusChart = () => {
   ];
 
   return (
-    <Paper elevation={0} sx={{ borderRadius: 1, overflow: 'hidden', backgroundColor: 'red' }}>
+    <Paper elevation={0} sx={{ borderRadius: 1, overflow: 'hidden', width: '600px' }}>
       <HeaderContainer>
         <Typography variant="h6" fontWeight="medium">
           Order Status

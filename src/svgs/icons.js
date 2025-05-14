@@ -1,5 +1,5 @@
-import * as React from "react"
-export const SearchIcon = ({height, width, color, ...props}) => (
+import * as React from "react";
+export const SearchIcon = ({ height, width, color, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -12,10 +12,15 @@ export const SearchIcon = ({height, width, color, ...props}) => (
       d="M13.898 12.441a6.77 6.77 0 1 0-1.456 1.456v.001c.03.042.065.082.102.12l4.011 4.01a1.042 1.042 0 1 0 1.473-1.473l-4.01-4.01a1.063 1.063 0 0 0-.12-.104Zm.269-4.004a5.73 5.73 0 1 1-11.459 0 5.73 5.73 0 0 1 11.459 0Z"
     />
   </svg>
-)
+);
 
-
-export const NotificationIcon = ({height, width, color, hasFillOpacity = false, ...props}) => (
+export const NotificationIcon = ({
+  height,
+  width,
+  color,
+  hasFillOpacity = false,
+  ...props
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -29,9 +34,9 @@ export const NotificationIcon = ({height, width, color, hasFillOpacity = false, 
       d="m17.19 13.332-.19-.231c-.86-1.04-1.38-1.667-1.38-4.61 0-1.523-.365-2.773-1.083-3.71-.53-.693-1.246-1.218-2.19-1.607a.117.117 0 0 1-.031-.026C11.976 2.011 11.047 1.25 10 1.25c-1.048 0-1.977.761-2.316 1.897a.122.122 0 0 1-.032.025C5.45 4.08 4.38 5.818 4.38 8.49c0 2.944-.52 3.571-1.38 4.61l-.19.231a1.373 1.373 0 0 0-.182 1.47c.24.508.754.823 1.34.823h12.067c.583 0 1.093-.315 1.335-.82a1.373 1.373 0 0 0-.18-1.472ZM10 18.75a3.128 3.128 0 0 0 2.751-1.646.157.157 0 0 0-.138-.229H7.387a.156.156 0 0 0-.139.23A3.128 3.128 0 0 0 10 18.75Z"
     />
   </svg>
-)
+);
 
-export const MailIcon = ({height, width, color, ...props}) => (
+export const MailIcon = ({ height, width, color, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -44,9 +49,9 @@ export const MailIcon = ({height, width, color, ...props}) => (
       d="m1.723 4.568 7.396 7.397a1.25 1.25 0 0 0 1.674.086l.095-.086 7.39-7.392c.024.092.04.185.049.281l.006.146v10a1.667 1.667 0 0 1-1.541 1.663l-.125.004H3.333a1.667 1.667 0 0 1-1.662-1.542L1.667 15V5c0-.1.008-.197.025-.292l.031-.14Zm14.944-1.235c.1 0 .2.009.295.026l.142.033-7.1 7.1L2.902 3.39a1.6 1.6 0 0 1 .283-.05l.148-.007h13.334Z"
     />
   </svg>
-)
+);
 
-export const CallIcon = ({height, width, color, ...props}) => (
+export const CallIcon = ({ height, width, color, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -59,9 +64,9 @@ export const CallIcon = ({height, width, color, ...props}) => (
       d="M5.714 2.038c.953.694 1.694 1.641 2.328 2.548l.368.536.348.513a1.253 1.253 0 0 1-.214 1.655L6.918 8.498a.4.4 0 0 0-.118.513c.368.669 1.023 1.666 1.773 2.416.751.75 1.794 1.448 2.51 1.858a.402.402 0 0 0 .537-.135l1.058-1.61a1.253 1.253 0 0 1 1.714-.277l.552.382c1.033.717 2.142 1.53 2.99 2.617a1.225 1.225 0 0 1 .158 1.236c-.698 1.628-2.463 3.014-4.299 2.946l-.25-.014-.194-.017-.215-.025-.234-.031-.254-.042a10.082 10.082 0 0 1-.134-.025l-.28-.06-.146-.033-.305-.079-.321-.091-.335-.109c-1.538-.521-3.49-1.546-5.494-3.55-2.003-2.002-3.028-3.955-3.55-5.493l-.108-.335-.091-.32-.079-.306-.065-.288a9.829 9.829 0 0 1-.052-.272L1.644 7.1l-.033-.234-.024-.215-.017-.194-.013-.25C1.489 4.377 2.89 2.599 4.51 1.905a1.225 1.225 0 0 1 1.204.133Zm6.78 2.995.096.011a2.917 2.917 0 0 1 2.382 2.467.834.834 0 0 1-1.632.327l-.02-.096a1.25 1.25 0 0 0-.89-1.027l-.13-.03a.834.834 0 0 1 .193-1.652ZM12.5 2.5a5 5 0 0 1 5 5 .833.833 0 0 1-1.66.098l-.007-.098a3.331 3.331 0 0 0-3.115-3.326l-.218-.007a.833.833 0 0 1 0-1.667Z"
     />
   </svg>
-)
+);
 
-export const MessageIcon = ({height, width, color, ...props}) => (
+export const MessageIcon = ({ height, width, color, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -74,9 +79,9 @@ export const MessageIcon = ({height, width, color, ...props}) => (
       d="M10 1.667a8.333 8.333 0 1 1 0 16.666H3.333a1.667 1.667 0 0 1-1.666-1.666V10A8.333 8.333 0 0 1 10 1.667Zm0 10H7.5a.833.833 0 1 0 0 1.666H10a.834.834 0 0 0 0-1.666Zm2.5-3.334h-5a.833.833 0 0 0-.098 1.661L7.5 10h5a.833.833 0 0 0 .098-1.66l-.098-.007Z"
     />
   </svg>
-)
+);
 
-export const CalendarIcon = ({height, width, color, ...props}) => (
+export const CalendarIcon = ({ height, width, color, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -91,23 +96,23 @@ export const CalendarIcon = ({height, width, color, ...props}) => (
       clipRule="evenodd"
     />
   </svg>
-)
-export const SaveIcon = ({height, width, color, ...props}) => (
+);
+export const SaveIcon = ({ height, width, color, ...props }) => (
   <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width={width}
-  height={height}
-  fill="none"
-  {...props}
->
-  <path
-    fill="#22C55E"
-    stroke="#22C55E"
-    d="M2.167 1h2v2.417l.008.173a1.752 1.752 0 0 0 1.742 1.577H9.25A1.75 1.75 0 0 0 11 3.417V1c.267.003.523.097.727.265l.086.077 2.012 2.012c.219.218.342.515.342.825v9.654A1.168 1.168 0 0 1 13 15h-1.167V9.667A2.167 2.167 0 0 0 9.667 7.5H5.5a2.167 2.167 0 0 0-2.167 2.167V15H2.167A1.167 1.167 0 0 1 1 13.833V2.167a1.167 1.167 0 0 1 1.052-1.161L2.167 1Zm7 9.167V15H6v-4.833h3.167ZM8.333 1v1.5h-1.5V1h1.5Z"
-  />
-</svg>
-)
-export const TotalOrdersIcon = ({height, width, color, ...props}) => (
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill="#22C55E"
+      stroke="#22C55E"
+      d="M2.167 1h2v2.417l.008.173a1.752 1.752 0 0 0 1.742 1.577H9.25A1.75 1.75 0 0 0 11 3.417V1c.267.003.523.097.727.265l.086.077 2.012 2.012c.219.218.342.515.342.825v9.654A1.168 1.168 0 0 1 13 15h-1.167V9.667A2.167 2.167 0 0 0 9.667 7.5H5.5a2.167 2.167 0 0 0-2.167 2.167V15H2.167A1.167 1.167 0 0 1 1 13.833V2.167a1.167 1.167 0 0 1 1.052-1.161L2.167 1Zm7 9.167V15H6v-4.833h3.167ZM8.333 1v1.5h-1.5V1h1.5Z"
+    />
+  </svg>
+);
+export const TotalOrdersIcon = ({ height, width, color, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -136,4 +141,18 @@ export const TotalOrdersIcon = ({height, width, color, ...props}) => (
       </linearGradient>
     </defs>
   </svg>
-  )
+);
+export const ArrowUpIcon = ({ height, width, color, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill={color}
+      d="M10.333 0a.667.667 0 0 0 0 1.333h1.058L8.333 4.391 5.805 1.862a.667.667 0 0 0-.943 0L.529 6.195a.667.667 0 1 0 .942.943l3.862-3.862 2.529 2.529a.667.667 0 0 0 .943 0l3.528-3.529v1.057a.666.666 0 1 0 1.334 0V.667A.667.667 0 0 0 13 0h-2.667Z"
+    />
+  </svg>
+);
