@@ -55,9 +55,14 @@ const Dashboard = () => {
       <Header />
       <Box
         display="flex"
-        sx={{ flex: 1, padding: "16px 16px 0 16px", overflow: "hidden" }}
+        flexDirection={{ xs: "column", md: "row" }}
+        sx={{
+          flex: 1,
+          padding: { xs: "8px 8px 0 8px", md: "16px 16px 0 16px" },
+          overflow: "hidden",
+        }}
       >
-        <MainSidebar />
+        <MainSidebar sx={{ display: { xs: "none", sm: "block" } }} />
         <Box
           display="flex"
           flexDirection="column"
@@ -73,23 +78,48 @@ const Dashboard = () => {
             <DemoDashboard />
             <Box
               display="flex"
-              flexDirection="row"
+              flexDirection={{ xs: "column", md: "row" }}
               flexWrap="wrap"
-              gap={2}
+              gap={{ xs: 1, sm: 1.5, md: 2 }}
               sx={{ width: "100%" }}
             >
-              <Box sx={{ flex: "1 1 calc(50% - 8px)", minWidth: "300px" }}>
+              <Box
+                sx={{
+                  flex: { xs: "1 1 100%", md: "1 1 calc(50% - 8px)" },
+                  minWidth: { xs: "100%", sm: "300px" },
+                  mb: { xs: 1, md: 0 },
+                }}
+              >
                 <OrderStatusCard />
               </Box>
-              <Box sx={{ flex: "1 1 calc(50% - 8px)", minWidth: "300px" }}>
+              <Box
+                sx={{
+                  flex: { xs: "1 1 100%", md: "1 1 calc(50% - 8px)" },
+                  minWidth: { xs: "100%", sm: "300px" },
+                }}
+              >
                 <RecentActivities />
               </Box>
             </Box>
-            <StyledContainer maxWidth="xl">
+            <StyledContainer
+              maxWidth="xl"
+              sx={{
+                px: { xs: 1, sm: 2 },
+                mt: { xs: 2, sm: 3, md: 4 },
+                mb: { xs: 2, sm: 3, md: 4 },
+              }}
+            >
               <RecentOrders />
             </StyledContainer>
 
-            <StyledContainer maxWidth="xl">
+            <StyledContainer
+              maxWidth="xl"
+              sx={{
+                px: { xs: 1, sm: 2 },
+                mt: { xs: 2, sm: 3, md: 4 },
+                mb: { xs: 2, sm: 3, md: 4 },
+              }}
+            >
               <RevenueDashboard />
             </StyledContainer>
 
