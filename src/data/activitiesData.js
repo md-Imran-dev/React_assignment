@@ -1,3 +1,4 @@
+// src/data/activitiesData.js
 import { MsgIcon, ReplyIcon } from "../svgs/icons";
 
 export const activities = [
@@ -79,6 +80,7 @@ export const activities = [
     isReply: false,
   },
 ];
+
 // Helper function to get the appropriate icon based on activity type
 export const getActivityIcon = (type, color) => {
   switch (type) {
@@ -91,4 +93,32 @@ export const getActivityIcon = (type, color) => {
     default:
       return <MsgIcon height={16} width={16} color="white" />;
   }
+};
+
+// Add additional helper function to process relationships
+export const processActivitiesRelationships = (activities) => {
+  const processedActivities = [...activities];
+
+  // Find potential parent messages for replies
+  for (let i = 0; i < processedActivities.length; i++) {
+    const activity = processedActivities[i];
+
+    if (activity.isReply) {
+      // Look for the nearest non-reply activity before this one as a potential parent
+      let j = i - 1;
+      while (j >= 0) {
+        if (!processedActivities[j].isReply) {
+          activity.replyTo = processedActivities[j].id;
+          processedActivities[j].hasReplies = true;
+          break;
+        }
+        j--;
+      }
+    } else {
+      // Initialize hasReplies for non-reply activities
+      activity.hasReplies = false;
+    }
+  }
+
+  return processedActivities;
 };

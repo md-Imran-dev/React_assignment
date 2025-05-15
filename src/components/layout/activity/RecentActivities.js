@@ -13,8 +13,11 @@ import {
 } from "@mui/material";
 import styled from "styled-components";
 import ThemeContext from "../../../context/ThemeContext";
-import { getActivityIcon } from "../../../data/activitiesData";
-import { activities } from "../../../data/activitiesData";
+import {
+  getActivityIcon,
+  activities,
+  processActivitiesRelationships,
+} from "../../../data/activitiesData";
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -24,26 +27,28 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   borderBottom: `1px solid ${theme.colors.border.card}`,
 }));
 
-// Styled components for the timeline effect
-const TimelineContainer = styled(Box)(({ theme }) => ({
-  position: "relative",
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 27,
-    width: 2,
-    backgroundColor: theme.colors.border.card,
-    zIndex: 0,
-  },
-}));
-
-const ActivityItem = styled(ListItem)(({ theme, isReply }) => ({
-  padding: theme.spacing(1, 2),
-  position: "relative",
-  marginLeft: isReply ? theme.spacing(5) : 0,
-}));
+// Styled Activity Item with conditional timeline connections
+const ActivityItem = styled(ListItem)(
+  ({ theme, isReply, hasTimeline, firstMessage }) => ({
+    padding: theme.spacing(1, 2),
+    position: "relative",
+    marginLeft: isReply ? theme.spacing(5) : 0,
+    // Add timeline connector for replied messages
+    ...(hasTimeline && {
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        top: firstMessage ? "50%" : 0,
+        bottom: 0,
+        left: isReply ? 6 : 26,
+        width: 2,
+        height: firstMessage ? "50%" : "100%",
+        backgroundColor: theme.colors.border.card,
+        zIndex: 0,
+      },
+    }),
+  })
+);
 
 const DateLabel = styled(Typography)(({ theme }) => ({
   fontWeight: "500",
@@ -67,7 +72,7 @@ const StyledTab = styled(Tab)({
   padding: "10px 16px",
   color: "inherit",
   transition: "all 0.2s ease",
-  height: "38px",
+  height: "25px",
   "&.Mui-selected": {
     color: "#6B46C1",
     fontWeight: "bold",
@@ -89,6 +94,7 @@ const ScrollableList = styled(List)`
   -ms-overflow-style: none;
 `;
 
+// Group activities by date
 const groupByDate = (items) => {
   return items.reduce((acc, item) => {
     if (!acc[item.date]) {
@@ -99,10 +105,48 @@ const groupByDate = (items) => {
   }, {});
 };
 
+// Check if an activity should have a timeline connector
+const shouldHaveTimeline = (activity, allActivities) => {
+  // If it's a reply, it should connect to its parent
+  if (activity.isReply) {
+    return true;
+  }
+
+  // If it has replies, it should connect to them
+  if (activity.hasReplies) {
+    // Check if there are actually any replies to this activity
+    return allActivities.some((item) => item.replyTo === activity.id);
+  }
+
+  return false;
+};
+
+// Check if an activity is the first in a conversation thread
+const isFirstInThread = (activity, index, dateGroup) => {
+  if (!activity.isReply) {
+    return true;
+  }
+
+  // Check if this is the first reply to a specific parent
+  for (let i = 0; i < index; i++) {
+    if (
+      dateGroup[i].id === activity.replyTo ||
+      (dateGroup[i].isReply && dateGroup[i].replyTo === activity.replyTo)
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
 const RecentActivities = () => {
   const { theme, isDarkMode } = useContext(ThemeContext);
   const [view, setView] = useState(0);
-  const groupedActivities = groupByDate(activities);
+
+  // Process activities to determine relationships
+  const processedActivities = processActivitiesRelationships(activities);
+  const groupedActivities = groupByDate(processedActivities);
 
   const handleChange = (event, newValue) => {
     setView(newValue);
@@ -186,12 +230,21 @@ const RecentActivities = () => {
               {date}
             </DateLabel>
 
-            <TimelineContainer>
-              {groupedActivities[date].map((activity) => (
+            <Box>
+              {groupedActivities[date].map((activity, index) => (
                 <ActivityItem
                   key={activity.id}
                   alignItems="flex-start"
                   isReply={activity.isReply}
+                  hasTimeline={shouldHaveTimeline(
+                    activity,
+                    processedActivities
+                  )}
+                  firstMessage={isFirstInThread(
+                    activity,
+                    index,
+                    groupedActivities[date]
+                  )}
                 >
                   <ListItemAvatar
                     sx={{
@@ -280,7 +333,7 @@ const RecentActivities = () => {
                   />
                 </ActivityItem>
               ))}
-            </TimelineContainer>
+            </Box>
           </Box>
         ))}
       </ScrollableList>
