@@ -230,3 +230,18 @@ export const CancelledIcon = ({ height, width, color, ...props }) => (
     />
   </svg>
 );
+export const MsgIcon = ({ height, width, color, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill={color}
+      stroke={color}
+      d="M8 1.833a6.167 6.167 0 0 1 0 12.333H2.666a.833.833 0 0 1-.833-.833V8A6.167 6.167 0 0 1 8 1.833Zm-2 7A1.167 1.167 0 0 0 4.833 10l.006.116A1.166 1.166 0 0 0 6 11.166h2a1.165 1.165 0 0 0 .824-1.99A1.166 1.166 0 0 0 8 8.832H6Zm0-2.667a1.167 1.167 0 0 0-1.152.989l-.012.11a1.167 1.167 0 0 0 1.027 1.227l.014.001.015.001.078.005.015.001H10a1.168 1.168 0 0 0 .137-2.325l-.015-.002h-.014l-.079-.006H6Z"
+    />
+  </svg>
+);

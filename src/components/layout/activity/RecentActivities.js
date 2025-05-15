@@ -15,6 +15,7 @@ import {
 import styled from "styled-components";
 import ThemeContext from "../../../context/ThemeContext";
 import { red } from "@mui/material/colors";
+import { MsgIcon } from "../../../svgs/icons";
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -78,6 +79,7 @@ const activities = [
     time: "1 min ago",
     date: "TODAY",
     color: "#ff9800",
+    icon: <MsgIcon />,
   },
   {
     id: 2,
