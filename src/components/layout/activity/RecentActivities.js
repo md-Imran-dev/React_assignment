@@ -67,23 +67,22 @@ const TimeText = styled(Typography)(({ theme }) => ({
 
 const StyledTab = styled(Tab)({
   textTransform: "none",
-  minWidth: 80,
-  fontWeight: "medium",
-  padding: "10px 16px",
+  fontWeight: "500",
   color: "inherit",
+  fontSize: "14px",
+  padding: "10px 16px",
   transition: "all 0.2s ease",
   height: "25px",
   "&.Mui-selected": {
     color: "#6B46C1",
     fontWeight: "bold",
     backgroundColor: "rgba(107, 70, 193, 0.1)",
+    height: "25px",
   },
 });
 
 const StyledTabs = styled(Tabs)({
-  "& .MuiTabs-indicator": {
-    display: "none",
-  },
+  "& .MuiTabs-indicator": { display: "none" },
 });
 
 const ScrollableList = styled(List)`
@@ -164,6 +163,7 @@ const RecentActivities = () => {
         width: "100%",
         border: `1px solid ${theme.colors.border.card}`,
         backgroundColor: theme.colors.background.main,
+        padding: "0px 20px 20px 20px",
       }}
     >
       <HeaderContainer>
@@ -175,6 +175,7 @@ const RecentActivities = () => {
             fontWeight: "600",
             lineHeight: "24px",
             color: theme.colors.text.primary,
+            padding: "12px 12px 12px 16px",
           }}
         >
           Recent Activities
@@ -199,6 +200,7 @@ const RecentActivities = () => {
                 height: "38px",
                 fontSize: "14px",
                 fontWeight: "500",
+                boxShadow: "1px 1px 3px 0px rgba(0, 0, 0, 0.06)",
               },
             }}
           />
@@ -212,6 +214,7 @@ const RecentActivities = () => {
                 height: "38px",
                 fontSize: "14px",
                 fontWeight: "500",
+                boxShadow: "1px 1px 3px 0px rgba(0, 0, 0, 0.06)",
               },
             }}
           />
@@ -224,7 +227,10 @@ const RecentActivities = () => {
             <DateLabel
               sx={{
                 color: theme.colors.text.primary,
-                padding: "16px 16px 8px",
+                padding: "20px 20px 5px 20px",
+                fontSize: "12px",
+                fontWeight: "500",
+                lineHeight: "18px",
               }}
             >
               {date}
