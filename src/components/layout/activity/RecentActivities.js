@@ -8,14 +8,13 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Button,
   Tabs,
   Tab,
 } from "@mui/material";
 import styled from "styled-components";
 import ThemeContext from "../../../context/ThemeContext";
-import { red } from "@mui/material/colors";
-import { MsgIcon } from "../../../svgs/icons";
+import { getActivityIcon } from "../../../data/activitiesData";
+import { activities } from "../../../data/activitiesData";
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -25,19 +24,40 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   borderBottom: `1px solid ${theme.colors.border.card}`,
 }));
 
-const ActivityItem = styled(ListItem)(({ theme }) => ({
+// Styled components for the timeline effect
+const TimelineContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 27,
+    width: 2,
+    backgroundColor: theme.colors.border.card,
+    zIndex: 0,
+  },
+}));
+
+const ActivityItem = styled(ListItem)(({ theme, isReply }) => ({
   padding: theme.spacing(1, 2),
+  position: "relative",
+  marginLeft: isReply ? theme.spacing(5) : 0,
 }));
 
 const DateLabel = styled(Typography)(({ theme }) => ({
-  fontWeight: "bold",
-  padding: theme.spacing(1.5, 2, 0.5),
+  fontWeight: "500",
+  padding: theme.spacing(2, 2, 1),
+  fontSize: "12px",
+  color: theme.colors.text.primary,
 }));
 
 const TimeText = styled(Typography)(({ theme }) => ({
-  fontSize: "12px",
+  fontSize: "14px",
   color: theme.colors.text.secondary,
-  marginTop: "4px",
+  display: "inline-flex",
+  alignItems: "center",
+  fontWeight: "500",
 }));
 
 const StyledTab = styled(Tab)({
@@ -68,70 +88,6 @@ const ScrollableList = styled(List)`
   scrollbar-width: none;
   -ms-overflow-style: none;
 `;
-
-const activities = [
-  {
-    id: 1,
-    type: "message",
-    user: "Christian Wood",
-    action: "Sent Message to",
-    recipient: "Nikita Houston",
-    time: "1 min ago",
-    date: "TODAY",
-    color: "#ff9800",
-    icon: <MsgIcon />,
-  },
-  {
-    id: 2,
-    type: "reply",
-    user: "Nikita Houston",
-    action: "Reply your message",
-    content: "Hello",
-    time: "1 min ago",
-    date: "TODAY",
-    color: "#2196f3",
-  },
-  {
-    id: 3,
-    type: "order",
-    user: "Christian Wood",
-    action: "Accept Order from",
-    source: "Ebay",
-    time: "1 min ago",
-    date: "TODAY",
-    color: "#f44336",
-  },
-  {
-    id: 4,
-    type: "reply",
-    user: "Rohan Walker",
-    action: "Reply your message",
-    source: "Ebay",
-    time: "1 min ago",
-    date: "TODAY",
-    color: "#2196f3",
-  },
-  {
-    id: 5,
-    type: "reply",
-    user: "Rohan Walker",
-    action: "Reply your message",
-    source: "Ebay",
-    time: "1 min ago",
-    date: "TODAY",
-    color: "#2196f3",
-  },
-  {
-    id: 6,
-    type: "order",
-    user: "Christian Wood",
-    action: "Accept Order from",
-    source: "Amazon",
-    time: "12:30PM",
-    date: "YESTERDAY",
-    color: "#f44336",
-  },
-];
 
 const groupByDate = (items) => {
   return items.reduce((acc, item) => {
@@ -175,7 +131,6 @@ const RecentActivities = () => {
             fontWeight: "600",
             lineHeight: "24px",
             color: theme.colors.text.primary,
-            padding: "10px",
           }}
         >
           Recent Activities
@@ -225,102 +180,107 @@ const RecentActivities = () => {
             <DateLabel
               sx={{
                 color: theme.colors.text.primary,
-                fontSize: "12px",
-                fontWeight: "500",
-                lineHeight: "18px",
-                padding: "10px",
+                padding: "16px 16px 8px",
               }}
             >
               {date}
             </DateLabel>
 
-            {groupedActivities[date].map((activity) => (
-              <ActivityItem key={activity.id} alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar
+            <TimelineContainer>
+              {groupedActivities[date].map((activity) => (
+                <ActivityItem
+                  key={activity.id}
+                  alignItems="flex-start"
+                  isReply={activity.isReply}
+                >
+                  <ListItemAvatar
                     sx={{
-                      bgcolor: activity.color,
-                      width: 36,
-                      height: 36,
-                      fontSize: "10px",
+                      minWidth: activity.isReply ? "40px" : "56px",
                     }}
                   >
-                    {activity.type === "message"
-                      ? "chat"
-                      : activity.type === "reply"
-                      ? "forum"
-                      : "shopping_cart"}
-                  </Avatar>
-                </ListItemAvatar>
+                    <Avatar
+                      sx={{
+                        bgcolor: activity.color,
+                        width: 24,
+                        height: 24,
+                      }}
+                    >
+                      {getActivityIcon(activity.type, activity.color)}
+                    </Avatar>
+                  </ListItemAvatar>
 
-                <ListItemText
-                  primary={
-                    <Box component="span">
-                      <Typography
-                        component="span"
-                        sx={{
-                          color: theme.colors.text.primary,
-                          fontWeight: "medium",
-                          fontSize: "14px",
-                        }}
-                      >
-                        {activity.user}
-                      </Typography>
-                      <Typography component="span" color="text.primary">
-                        {" "}
-                        {activity.action}{" "}
-                      </Typography>
-                      {activity.recipient && (
+                  <ListItemText
+                    primary={
+                      <Box component="span">
+                        <Typography
+                          component="span"
+                          sx={{
+                            color: "#5559ca",
+                            fontWeight: "500",
+                            fontSize: "14px",
+                          }}
+                        >
+                          {activity.user}
+                        </Typography>
                         <Typography
                           component="span"
                           sx={{
                             color: theme.colors.text.primary,
-                            fontWeight: "medium",
-                          }}
-                        >
-                          {activity.recipient}
-                        </Typography>
-                      )}
-                      {activity.source && (
-                        <Typography
-                          component="span"
-                          sx={{
-                            color: theme.colors.text.primary,
-                            fontWeight: "medium",
-                          }}
-                        >
-                          {activity.source}
-                        </Typography>
-                      )}
-                      {activity.content && (
-                        <Typography
-                          component="span"
-                          sx={{
-                            fontWeight: "medium",
                             fontSize: "14px",
                           }}
                         >
                           {" "}
-                          "
+                          {activity.action}{" "}
+                        </Typography>
+                        {activity.recipient && (
                           <Typography
                             component="span"
                             sx={{
-                              color: theme.colors.text.primary,
-                              fontSize: "2px",
+                              color: "#5559ca",
+                              fontWeight: "500",
+                              fontSize: "14px",
                             }}
                           >
-                            {activity.content}
+                            {activity.recipient}
                           </Typography>
-                          "
-                        </Typography>
-                      )}
-                    </Box>
-                  }
-                  secondary={<TimeText>• {activity.time}</TimeText>}
-                  disableTypography
-                />
-              </ActivityItem>
-            ))}
+                        )}
+                        {activity.source && (
+                          <Typography
+                            component="span"
+                            sx={{
+                              color: "#5559ca",
+                              fontWeight: "500",
+                              fontSize: "14px",
+                            }}
+                          >
+                            {activity.source}
+                          </Typography>
+                        )}
+                        {activity.content && (
+                          <Typography
+                            component="span"
+                            sx={{
+                              fontWeight: "500",
+                              fontSize: "14px",
+                              color: theme.colors.text.primary,
+                            }}
+                          >
+                            {" "}
+                            "{activity.content}"
+                          </Typography>
+                        )}
+                      </Box>
+                    }
+                    secondary={
+                      <TimeText sx={{ fontSize: "14px" }}>
+                        • {activity.time}
+                      </TimeText>
+                    }
+                    disableTypography
+                  />
+                </ActivityItem>
+              ))}
+            </TimelineContainer>
           </Box>
         ))}
       </ScrollableList>

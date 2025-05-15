@@ -245,3 +245,18 @@ export const MsgIcon = ({ height, width, color, ...props }) => (
     />
   </svg>
 );
+export const ReplyIcon = ({ height, width, color, fillOpacity, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill={color}
+      fillOpacity={fillOpacity}
+      d="M3.773 4.315A4.667 4.667 0 0 1 12 7.333a1 1 0 0 0 2 0 6.667 6.667 0 0 0-11.612-4.47l-.231-1.31a1 1 0 1 0-1.97.347l.695 3.94c.046.26.193.493.411.645.27.188.623.23.924.135l3.762-.664a1 1 0 1 0-.346-1.97l-1.859.328Z"
+    />
+  </svg>
+);
