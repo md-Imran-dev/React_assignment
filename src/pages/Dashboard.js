@@ -113,6 +113,7 @@ const Dashboard = () => {
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
           <ContentWrapper>
             <TabDashboard />
+
             <ResponsiveBox>
               <CardContainer>
                 <OrderStatusCard />
@@ -121,6 +122,7 @@ const Dashboard = () => {
                 <RecentActivities />
               </CardContainer>
             </ResponsiveBox>
+
             <StyledContainer
               maxWidth="xl"
               sx={{

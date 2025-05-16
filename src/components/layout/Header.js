@@ -10,13 +10,61 @@ import {
   useMediaQuery,
   useTheme as useMuiTheme,
   Drawer,
+  Tooltip,
 } from "@mui/material";
 import styled from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ThemeToggle from "../common/ThemeToggle";
 import ThemeContext from "../../context/ThemeContext";
 import { NotificationIcon, SearchIcon } from "../../svgs/icons";
+import { DarkModeIcon, LightModeIcon } from "../../svgs/icons";
+
+// Styled components for ThemeToggle
+const StyledThemeIconButton = styled(IconButton)`
+  color: ${(props) => props.theme.colors.text.primary.dark};
+  margin-left: ${(props) => props.theme.spacing(2)};
+  padding: 8px;
+
+  @media (max-width: 600px) {
+    margin-left: ${(props) => props.theme.spacing(1)};
+    padding: 6px;
+  }
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.background.subdued};
+  }
+`;
+
+// ThemeToggle component
+const ThemeToggle = () => {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
+
+  return (
+    <Tooltip title={`Switch to ${isDarkMode ? "light" : "dark"} mode`}>
+      <StyledThemeIconButton
+        onClick={toggleTheme}
+        size={isMobile ? "small" : "medium"}
+        aria-label="toggle dark/light theme"
+      >
+        {isDarkMode ? (
+          <LightModeIcon
+            width={isMobile ? 20 : 22}
+            height={isMobile ? 20 : 22}
+            color={isDarkMode ? "#FFFFFF" : "#1C274C"}
+          />
+        ) : (
+          <DarkModeIcon
+            width={isMobile ? 20 : 22}
+            height={isMobile ? 20 : 22}
+            color={isDarkMode ? "#FFFFFF" : "#1C274C"}
+          />
+        )}
+      </StyledThemeIconButton>
+    </Tooltip>
+  );
+};
 
 const HeaderAppBar = styled.div`
   background-color: ${(props) => props.theme.colors.background.card};
@@ -115,7 +163,7 @@ const SubTitleText = styled.p`
 `;
 
 const Header = () => {
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const { isDarkMode } = useContext(ThemeContext);
   const muiTheme = useMuiTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -258,7 +306,7 @@ const Header = () => {
             )}
           </Box>
 
-          {/* You can add menu items here */}
+          {/* Theme toggle in drawer for mobile view */}
           <Box sx={{ p: 2 }}>
             <ThemeToggle />
           </Box>
