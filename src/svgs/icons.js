@@ -14,8 +14,6 @@ export const DarkModeIcon = ({ width, height, color, ...props }) => (
     />
   </svg>
 );
-
-// Simplified Light Mode icon for UI purposes
 export const LightModeIcon = ({ width, height, color, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

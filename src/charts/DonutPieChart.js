@@ -41,22 +41,13 @@ export default function DonutPieChart() {
       <>
         <text
           x={cx}
-          y={cy - 5}
+          y={cy}
           textAnchor="middle"
-          dominantBaseline="middle"
+          dominantBaseline="central"
           fontSize="18"
           fontWeight="bold"
         >
           {total}
-        </text>
-        <text
-          x={cx}
-          y={cy + 15}
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize="12"
-        >
-          Total
         </text>
       </>
     );

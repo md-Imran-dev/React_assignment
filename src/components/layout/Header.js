@@ -19,7 +19,6 @@ import ThemeContext from "../../context/ThemeContext";
 import { NotificationIcon, SearchIcon } from "../../svgs/icons";
 import { DarkModeIcon, LightModeIcon } from "../../svgs/icons";
 
-// Styled components for ThemeToggle
 const StyledThemeIconButton = styled(IconButton)`
   color: ${(props) => props.theme.colors.text.primary.dark};
   margin-left: ${(props) => props.theme.spacing(2)};
@@ -35,7 +34,6 @@ const StyledThemeIconButton = styled(IconButton)`
   }
 `;
 
-// ThemeToggle component
 const ThemeToggle = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const muiTheme = useMuiTheme();
@@ -232,7 +230,7 @@ const Header = () => {
               />
             </SearchWrapper>
           </Box>
-
+          {!isMobile && <ThemeToggle />}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <StyledIconButton
               size={isMobile ? "small" : "medium"}
@@ -248,8 +246,6 @@ const Header = () => {
                 />
               </Badge>
             </StyledIconButton>
-
-            {!isMobile && <ThemeToggle />}
 
             <Box
               sx={{

@@ -7,7 +7,6 @@ import {
   ToggleButton,
   Select,
   MenuItem,
-  Button,
 } from "@mui/material";
 import {
   BarChart,
@@ -32,7 +31,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   "& .MuiToggleButtonGroup-grouped": {
     margin: 0,
     border: 0,
-    borderRadius: 0,
+    borderRadius: "12px",
 
     "&.Mui-selected": {
       backgroundColor: theme.colors.background.button,
@@ -48,51 +47,26 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
         left: 1,
         right: 1,
         bottom: 1,
-        borderRadius: "10px",
+        borderRadius: "12px",
         border: `1px solid ${theme.colors.border.card}`,
         pointerEvents: "none",
       },
     },
 
     "&:not(:first-of-type)": {
-      borderRadius: 0,
+      borderRadius: "12px",
     },
     "&:first-of-type": {
-      borderRadius: 0,
+      borderRadius: "12px",
     },
-  },
-}));
-
-const StyledSelect = styled(Select)(({ theme }) => ({
-  "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: theme.colors.border.card,
-    borderRadius: 8,
-  },
-  "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: theme.colors.border.card,
-  },
-  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    borderColor: theme.colors.border.card,
-  },
-}));
-
-const DateButton = styled(Button)(({ theme }) => ({
-  borderRadius: 8,
-  border: "1px solid #e0e0e0",
-  color: "inherit",
-  textTransform: "none",
-  padding: "5px 15px",
-  backgroundColor: theme.colors.background.card,
-  "&:hover": {
-    backgroundColor: theme.colors.background.card,
-    borderColor: theme.colors.border.card,
   },
 }));
 
 const RevenueDashboard = () => {
   const [view, setView] = useState("revenue");
   const [category, setCategory] = useState("All Categories");
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const [year, setYear] = useState("2023");
+  const { theme } = useContext(ThemeContext);
   const handleViewChange = (event, newView) => {
     if (newView !== null) {
       setView(newView);
@@ -105,7 +79,7 @@ const RevenueDashboard = () => {
       sx={{
         borderRadius: 3,
         overflow: "hidden",
-        p: 3,
+        padding: "1px",
         border: `1px solid ${theme.colors.border.card}`,
         backgroundColor: theme.colors.background.main,
       }}
@@ -115,8 +89,13 @@ const RevenueDashboard = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          mb: 4,
+          mb: 2,
           borderBottom: `1px solid ${theme.colors.border.card}`,
+          padding: "16px",
+          "@media (max-width: 767px)": {
+            flexDirection: "column",
+            gap: 1,
+          },
         }}
       >
         <StyledToggleButtonGroup
@@ -143,38 +122,61 @@ const RevenueDashboard = () => {
           </ToggleButton>
         </StyledToggleButtonGroup>
 
-        <Box sx={{ display: "flex", gap: 1, paddingBottom: "10px" }}>
-          <StyledSelect
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            "@media (max-width: 767px)": {
+              width: "100%",
+              justifyContent: "space-between",
+            },
+          }}
+        >
+          <Select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             displayEmpty
             size="small"
             IconComponent={KeyboardArrowDownIcon}
-            sx={{ minWidth: 140 }}
+            sx={{
+              minWidth: { xs: 110, sm: 140 },
+              ".MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.colors.border.card,
+              },
+              fontSize: "14px",
+              // boxShadow: "0px 1px 2px 0px ${theme.colors.border.card}",
+            }}
           >
             <MenuItem value="All Categories">All Categories</MenuItem>
             <MenuItem value="Electronics">Electronics</MenuItem>
             <MenuItem value="Clothing">Clothing</MenuItem>
-          </StyledSelect>
+          </Select>
 
-          <DateButton
+          <Select
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            displayEmpty
+            size="small"
+            IconComponent={KeyboardArrowDownIcon}
             sx={{
-              color: isDarkMode ? "white" : "#0E253C",
-              fontSize: "12px",
-              backgroundColor: theme.colors.background.card,
-              border: `1px solid ${theme.colors.border.card}`,
+              minWidth: { xs: 90, sm: 100 },
+              ".MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.colors.border.card,
+              },
+              fontSize: "14px",
+              color: theme.colors.text.primary,
             }}
-            endIcon={
+            startAdornment={
               <CalendarMonthIcon
-                sx={{
-                  color: isDarkMode ? "white" : "#0E253C",
-                  fontSize: "12px",
-                }}
+                fontSize="small"
+                sx={{ ml: 1, mr: 0.5, color: theme.colors.text.primary }}
               />
             }
           >
-            Jun 2023
-          </DateButton>
+            <MenuItem value="2023">2023</MenuItem>
+            <MenuItem value="2022">2022</MenuItem>
+            <MenuItem value="2021">2021</MenuItem>
+          </Select>
         </Box>
       </Box>
 
@@ -191,7 +193,11 @@ const RevenueDashboard = () => {
         <Typography
           variant="h6"
           fontWeight="medium"
-          sx={{ color: theme.colors.text.primary, fontSize: "18px" }}
+          sx={{
+            color: theme.colors.text.primary,
+            fontSize: "18px",
+            paddingLeft: "1.5rem",
+          }}
         >
           Revenue
         </Typography>

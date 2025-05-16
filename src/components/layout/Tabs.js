@@ -21,7 +21,6 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
         display: "flex",
         gap: "4px",
         overflowX: "auto",
-        padding: "0 8px",
         scrollbarWidth: "none", // Firefox
         msOverflowStyle: "none", // IE and Edge
       }}
@@ -41,8 +40,8 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
             border: `1px solid ${theme.colors.border.card}`,
             borderBottom:
               activeTab === tab
-                ? `1px solid ${backgroundColor.active}`
-                : `1px solid ${theme.colors.border.card}`,
+                ? `1px solid ${theme.colors.border.card}`
+                : "none",
           }}
         >
           {tab}
