@@ -19,9 +19,9 @@ import {
 } from "recharts";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import ThemeContext from "../../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 import styled from "styled-components";
-import { revenueData } from "../../../data/revenueData";
+import { revenueData } from "../data/revenueData";
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   backgroundColor: theme.colors.background.card,

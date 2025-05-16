@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from "react";
-import "./DemoDashboard.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import styled from "styled-components";
-import { orderMetrics } from "../../data/orderData";
-import ThemeContext from "../../context/ThemeContext";
+import { orderMetrics } from "../../../data/orderData";
+import ThemeContext from "../../../context/ThemeContext";
+import "../../../styles/TabDashboard.css";
 
 const MainContainer = styled.div`
   background: ${(props) => props.theme.colors.background.card};
@@ -50,7 +50,7 @@ const MetricValue = styled.div`
   color: ${(props) => props.theme.colors.text.primary};
 `;
 
-const DemoDashboard = () => {
+const TabDashboard = () => {
   const scrollRef = useRef(null);
   const { isDarkMode } = useContext(ThemeContext);
 
@@ -138,4 +138,4 @@ const DemoDashboard = () => {
   );
 };
 
-export default DemoDashboard;
+export default TabDashboard;

@@ -6,9 +6,9 @@ import { Box, Container } from "@mui/material";
 import OrderStatusCard from "../components/layout/orders/OrderStatusCard";
 import RecentActivities from "../components/layout/activity/RecentActivities";
 import RecentOrders from "../components/layout/orders/RecentOrders";
-import RevenueDashboard from "../components/layout/dashboardmain/RevenueDashboard";
+import RevenueDashboard from "../charts/RevenueDashboard";
 import styled from "styled-components";
-import DemoDashboard from "../components/demoDashboard/DemoDashboard";
+import TabDashboard from "../components/layout/dashboardmain/TabDashboard";
 import Tabs from "../components/layout/Tabs";
 
 const DashboardContainer = styled(Box)`
@@ -112,7 +112,7 @@ const Dashboard = () => {
         >
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
           <ContentWrapper>
-            <DemoDashboard />
+            <TabDashboard />
             <ResponsiveBox>
               <CardContainer>
                 <OrderStatusCard />
