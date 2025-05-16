@@ -2,18 +2,10 @@ import React, { useContext, useState } from "react";
 import { Box, Typography, Paper, Select, MenuItem } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import styled from "styled-components";
 import ThemeContext from "../../../context/ThemeContext";
-import {
-  AllIcon,
-  CancelledIcon,
-  DeliveredIcon,
-  DispatchedIcon,
-  NewIcon,
-  PendingIcon,
-} from "../../../svgs/icons";
 import DonutPieChart from "../../../charts/DonutPieChart";
+import { statusData } from "../../../data/statusData";
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -87,68 +79,10 @@ const ContentContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-// Colors matching the Figma design
-const COLORS = [
-  "#5e35b1", // purple for All
-  "#7C52DD", // purple for New
-  "#3949ab", // blue for Pending
-  "#5c6bc0", // blue for Dispatched
-  "#43a047", // green for Delivered
-  "#e53935", // red for Cancelled
-];
-
 const OrderStatusCard = () => {
   const [category, setCategory] = useState("All Categories");
   const [year, setYear] = useState("2023");
   const { theme, isDarkMode } = useContext(ThemeContext);
-
-  const statusData = [
-    {
-      name: "All",
-      value: 50,
-      icon: (color) => <AllIcon width={28} height={28} color={color} />,
-      color: "#5e35b1",
-    },
-    {
-      name: "New",
-      value: 50,
-      icon: (color) => <NewIcon width={28} height={28} color={color} />,
-      color: "#7C52DD",
-    },
-    {
-      name: "Pending",
-      value: 50,
-      icon: (color) => <PendingIcon width={28} height={28} color={color} />,
-      color: "#3949ab",
-    },
-    {
-      name: "Dispatched",
-      value: 50,
-      icon: (color) => <DispatchedIcon width={28} height={28} color={color} />,
-      color: "#5c6bc0",
-    },
-    {
-      name: "Delivered",
-      value: 123,
-      icon: (color) => <DeliveredIcon width={28} height={28} color={color} />,
-      color: "#43a047",
-    },
-    {
-      name: "Cancelled",
-      value: 50,
-      icon: (color) => <CancelledIcon width={28} height={28} color={color} />,
-      color: "#e53935",
-    },
-  ];
-
-  // Calculate total for the center of the chart
-  const total = statusData.reduce((sum, item) => sum + item.value, 0);
-
-  // Add percentage to data for chart labels
-  const chartData = statusData.map((item) => ({
-    ...item,
-    percentage: Math.round((item.value / total) * 100),
-  }));
 
   return (
     <Paper

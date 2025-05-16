@@ -398,3 +398,89 @@ export const TotalRevenueCardIcon = ({ height, width, color, ...props }) => (
     </defs>
   </svg>
 );
+export const PendingOrderIcon = ({ height, width, color, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <rect width={53} height={53} x={1.1} y={0.5} fill="#F6F8F9" rx={11.5} />
+    <rect width={53} height={53} x={1.1} y={0.5} stroke="url(#a)" rx={11.5} />
+    <path
+      fill="url(#b)"
+      d="M27.6 13.667c1.25 0 2.467.144 3.635.414a1.335 1.335 0 0 1 .8 2.084 1.333 1.333 0 0 1-1.403.514 13.305 13.305 0 0 0-1.999-.307l-.56-.03.454.026a11.93 11.93 0 0 1 5.432 1.787l.364.237.808-.808a1.333 1.333 0 0 1 1.997 1.76l-.11.125-.66.66a12 12 0 1 1-9.463-3.774l.265-.014-.08.002c-.69.026-1.364.106-2.021.232l-.491.104a1.333 1.333 0 0 1-.603-2.598 16.1 16.1 0 0 1 3.635-.414Zm0 8A1.333 1.333 0 0 0 26.267 23v5.333a1.333 1.333 0 1 0 2.666 0V23a1.333 1.333 0 0 0-1.333-1.333Z"
+    />
+    <defs>
+      <linearGradient
+        id="a"
+        x1={27.6}
+        x2={27.6}
+        y1={0}
+        y2={54}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.495} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+      <linearGradient
+        id="b"
+        x1={27.6}
+        x2={27.6}
+        y1={13.667}
+        y2={40.334}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.5} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+export const PendingReturnIcon = ({ height, width, color, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <rect width={53} height={53} x={1.3} y={0.5} fill="#F6F8F9" rx={11.5} />
+    <rect width={53} height={53} x={1.3} y={0.5} stroke="url(#a)" rx={11.5} />
+    <path
+      fill="url(#b)"
+      fillRule="evenodd"
+      d="M29.533 36.832a10.005 10.005 0 0 1-10.508-5.039 2 2 0 0 0-3.506 1.924c2.802 5.114 8.64 8.124 14.709 7.054 7.613-1.342 12.699-8.603 11.356-16.218-1.344-7.614-8.604-12.7-16.219-11.356a14.004 14.004 0 0 0-11.509 12.458c-.165 1.745 1.688 2.878 3.157 2.065l3.76-2.083c2.063-1.141 1.023-4.292-1.314-3.981l-.136.019a10 10 0 1 1 10.21 15.157Z"
+      clipRule="evenodd"
+    />
+    <defs>
+      <linearGradient
+        id="a"
+        x1={27.8}
+        x2={27.8}
+        y1={0}
+        y2={54}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.495} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+      <linearGradient
+        id="b"
+        x1={27.822}
+        x2={27.822}
+        y1={12.982}
+        y2={40.986}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.5} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+    </defs>
+  </svg>
+);

@@ -16,7 +16,17 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
   }
 
   return (
-    <div style={{ display: "flex", gap: "4px" }}>
+    <div
+      style={{
+        display: "flex",
+        gap: "4px",
+        overflowX: "auto",
+        padding: "0 8px",
+        scrollbarWidth: "none", // Firefox
+        msOverflowStyle: "none", // IE and Edge
+      }}
+      className="hide-scrollbar"
+    >
       {tabs.map((tab) => (
         <button
           key={tab}

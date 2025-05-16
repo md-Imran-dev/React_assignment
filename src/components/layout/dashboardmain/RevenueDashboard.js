@@ -21,44 +21,24 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ThemeContext from "../../../context/ThemeContext";
 import styled from "styled-components";
+import { revenueData } from "../../../data/revenueData";
 
-// Exact data from the screenshot
-const revenueData = [
-  { name: "Jan", value: 589.12, displayValue: "$589.12" },
-  { name: "Feb", value: 840.2, displayValue: "$840.20" },
-  { name: "Mar", value: 898.0, displayValue: "$898.00" },
-  { name: "Apr", value: 203.0, displayValue: "$203.00" },
-  { name: "May", value: 400.01, displayValue: "$400.01" },
-  { name: "Jun", value: 920.12, displayValue: "$920.12" },
-  { name: "Jul", value: 398.0, displayValue: "$398.00" },
-  { name: "Aug", value: 882.0, displayValue: "$882.00" },
-  { name: "Sep", value: 390.0, displayValue: "$390.00" },
-  { name: "Oct", value: 910.0, displayValue: "$910.00" },
-  { name: "Nov", value: 410.12, displayValue: "$410.12" },
-  { name: "Dec", value: 840.2, displayValue: "$840.20" },
-];
-
-// Styled components
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   backgroundColor: theme.colors.background.card,
   border: `1px solid ${theme.colors.border.card}`,
   borderRadius: "12px",
-  // padding: 0, // Ensure no padding in container
-  overflow: "hidden", // Critical - this prevents children from protruding
+  overflow: "hidden",
 
   "& .MuiToggleButtonGroup-grouped": {
     margin: 0,
     border: 0,
-    borderRadius: 0, // Remove individual button border radius
+    borderRadius: 0,
 
     "&.Mui-selected": {
       backgroundColor: theme.colors.background.button,
       color: "inherit",
       fontWeight: 500,
       boxShadow: `0 1px 3px ${theme.colors.Paper}`,
-      // Remove the border that's causing the issue
-      // border: 0,
-      // Add internal border if needed that won't affect outer shape
       boxSizing: "border-box",
       position: "relative",
       "&::after": {
@@ -74,7 +54,6 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
       },
     },
 
-    // Remove these individual border radius settings
     "&:not(:first-of-type)": {
       borderRadius: 0,
     },
@@ -131,7 +110,6 @@ const RevenueDashboard = () => {
         backgroundColor: theme.colors.background.main,
       }}
     >
-      {/* Toggle buttons and filters */}
       <Box
         sx={{
           display: "flex",
@@ -229,7 +207,6 @@ const RevenueDashboard = () => {
         </Typography>
       </Box>
 
-      {/* Bar chart */}
       <Box sx={{ width: "100%", height: 400, mt: 4 }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -265,7 +242,7 @@ const RevenueDashboard = () => {
               label={{
                 position: "top",
                 content: (props) => {
-                  const { x, y, width, value, index } = props;
+                  const { x, y, width, value } = props;
                   return (
                     <text
                       x={x + width / 2}

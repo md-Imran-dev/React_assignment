@@ -3,7 +3,6 @@ import "./DemoDashboard.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import styled from "styled-components";
 import { orderMetrics } from "../../data/orderData";
-import { TotalOrdersCardIcon, TotalOrdersIcon } from "../../svgs/icons";
 import ThemeContext from "../../context/ThemeContext";
 
 const MainContainer = styled.div`
@@ -28,23 +27,6 @@ const CardTop = styled.div`
   gap: 18px;
   padding: 22px 22px 8px 22px;
   background: ${(props) => props.theme.colors.background.main};
-`;
-
-const CardIconGradient = styled.div`
-  background: linear-gradient(135deg, #f5576c 0, #f093fb 100%);
-  border-radius: 12px;
-  display: inline-flex;
-  padding: 2px;
-`;
-
-const CardIconInner = styled.div`
-  background: ${(props) => props.theme.colors.background.card};
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 54px;
-  height: 54px;
 `;
 
 const CardBottom = styled.div`

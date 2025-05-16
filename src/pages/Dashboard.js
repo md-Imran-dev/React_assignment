@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/layout/Header";
 import MainSidebar from "../components/layout/sidebar/MainSidebar";
 import { Outlet } from "react-router-dom";
-import { Box, Container, Grid, Paper } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import OrderStatusCard from "../components/layout/orders/OrderStatusCard";
 import RecentActivities from "../components/layout/activity/RecentActivities";
 import RecentOrders from "../components/layout/orders/RecentOrders";
