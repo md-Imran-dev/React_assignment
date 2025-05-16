@@ -13,6 +13,7 @@ import {
   NewIcon,
   PendingIcon,
 } from "../../../svgs/icons";
+import DonutPieChart from "../../../charts/DonutPieChart";
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -161,7 +162,15 @@ const OrderStatusCard = () => {
       }}
     >
       <HeaderContainer>
-        <Typography variant="h6" fontWeight="600" sx={{ fontSize: "16px" }}>
+        <Typography
+          variant="h6"
+          fontWeight="600"
+          sx={{
+            fontSize: "16px",
+            padding: "12px 12px 12px 16px",
+            color: theme.colors.text.primary,
+          }}
+        >
           Order Status
         </Typography>
 
@@ -183,8 +192,11 @@ const OrderStatusCard = () => {
             IconComponent={KeyboardArrowDownIcon}
             sx={{
               minWidth: { xs: 110, sm: 140 },
-              ".MuiOutlinedInput-notchedOutline": { borderColor: "#e0e0e0" },
+              ".MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.colors.border.card,
+              },
               fontSize: "14px",
+              // boxShadow: "0px 1px 2px 0px ${theme.colors.border.card}",
             }}
           >
             <MenuItem value="All Categories">All Categories</MenuItem>
@@ -200,11 +212,17 @@ const OrderStatusCard = () => {
             IconComponent={KeyboardArrowDownIcon}
             sx={{
               minWidth: { xs: 90, sm: 100 },
-              ".MuiOutlinedInput-notchedOutline": { borderColor: "#e0e0e0" },
+              ".MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.colors.border.card,
+              },
               fontSize: "14px",
+              color: theme.colors.text.primary,
             }}
             startAdornment={
-              <CalendarMonthIcon fontSize="small" sx={{ ml: 1, mr: 0.5 }} />
+              <CalendarMonthIcon
+                fontSize="small"
+                sx={{ ml: 1, mr: 0.5, color: theme.colors.text.primary }}
+              />
             }
           >
             <MenuItem value="2023">2023</MenuItem>
@@ -259,49 +277,13 @@ const OrderStatusCard = () => {
         <ChartContainer>
           <Box
             sx={{
-              position: "relative",
-              width: { xs: "100%", sm: "180px" },
-              height: { xs: "180px", sm: "180px" },
-              maxWidth: "220px",
+              width: "100%",
+              height: "100%",
+              maxWidth: 250,
               margin: "0 auto",
             }}
           >
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  innerRadius={60}
-                  outerRadius={80}
-                  paddingAngle={2}
-                  dataKey="value"
-                  startAngle={90}
-                  endAngle={-270}
-                  label={({ percentage }) => ``}
-                  labelLine={false}
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                      cornerRadius={4}
-                    />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                textAlign: "center",
-              }}
-            >
-              <Typography variant="h4" fontWeight="bold">
-                {total}
-              </Typography>
-            </Box>
+            <DonutPieChart />
           </Box>
         </ChartContainer>
       </ContentContainer>

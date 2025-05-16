@@ -1,22 +1,12 @@
 import React from "react";
-import { PieChart, Pie, Cell, Label } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Label } from "recharts";
+import { pieData, PIE_COLORS } from "../data/chartData";
 
-// Example data - you can modify this to see how percentages change
-const data = [
-  { name: "Group A", value: 20 },
-  { name: "Group B", value: 20 },
-  { name: "Group C", value: 20 },
-  { name: "Group D", value: 20 },
-  { name: "Group E", value: 20 },
-];
+export default function DonutPieChart() {
+  // Calculate total value from the imported data
+  const total = pieData.reduce((sum, entry) => sum + entry.value, 0);
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
-
-// Calculate the total value - this will update whenever data changes
-const total = data.reduce((sum, entry) => sum + entry.value, 0);
-
-export default function CardDashboard() {
-  // Custom label for percentage display on each segment
+  // Render percentage labels on segments
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -44,7 +34,7 @@ export default function CardDashboard() {
     );
   };
 
-  // Custom center label component to show the total
+  // Render total in the center
   const renderCenterLabel = ({ viewBox }) => {
     const { cx, cy } = viewBox;
     return (
@@ -73,26 +63,29 @@ export default function CardDashboard() {
   };
 
   return (
-    <div style={{ width: "242px", height: "242px" }}>
-      <PieChart width={242} height={242}>
+    <ResponsiveContainer width="100%" height={242}>
+      <PieChart>
         <Pie
-          data={data}
-          cx={121}
-          cy={121}
+          data={pieData}
+          cx="50%"
+          cy="50%"
           innerRadius={50}
           outerRadius={80}
           fill="#8884d8"
-          paddingAngle={0} // Changed from 2 to 0 to remove padding
+          paddingAngle={0}
           dataKey="value"
           labelLine={false}
           label={renderCustomizedLabel}
         >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          {pieData.map((entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={PIE_COLORS[index % PIE_COLORS.length]}
+            />
           ))}
           <Label content={renderCenterLabel} position="center" />
         </Pie>
       </PieChart>
-    </div>
+    </ResponsiveContainer>
   );
 }
