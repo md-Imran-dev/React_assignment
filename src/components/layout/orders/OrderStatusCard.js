@@ -278,7 +278,7 @@ const OrderStatusCard = () => {
           <Box
             sx={{
               width: "100%",
-              height: "100%",
+              // height: "100%",
               maxWidth: 250,
               margin: "0 auto",
             }}

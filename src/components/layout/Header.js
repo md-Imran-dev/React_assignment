@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Toolbar,
@@ -7,9 +7,13 @@ import {
   InputBase,
   Badge,
   Avatar,
+  useMediaQuery,
+  useTheme as useMuiTheme,
+  Drawer,
 } from "@mui/material";
 import styled from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ThemeToggle from "../common/ThemeToggle";
 import ThemeContext from "../../context/ThemeContext";
 import { NotificationIcon, SearchIcon } from "../../svgs/icons";
@@ -18,24 +22,25 @@ const HeaderAppBar = styled.div`
   background-color: ${(props) => props.theme.colors.background.card};
   color: ${(props) => props.theme.colors.text.primary.light};
   box-shadow: none;
-  height: 64px;
-  gap: 32px;
+  height: ${(props) => (props.isMobile ? "56px" : "64px")};
+  gap: ${(props) => (props.isMobile ? "16px" : "32px")};
   flex-shrink: 0;
   border-bottom: 1px solid ${(props) => props.theme.colors.border.card};
 `;
 
 const SearchWrapper = styled.div`
   position: relative;
-  border-radius: 12px;
+  border-radius: ${(props) => (props.isMobile ? "8px" : "12px")};
   background-color: ${(props) => props.theme.colors.background.main};
-  margin-right: ${(props) => props.theme.spacing(2)};
-  margin-left: 0;
-  width: 100%;
-  height: 38px;
+  margin-right: ${(props) =>
+    props.isMobile ? props.theme.spacing(1) : props.theme.spacing(2)};
+  margin-left: ${(props) => (props.isMobile ? props.theme.spacing(1) : 0)};
+  width: ${(props) => (props.isMobile ? "100%" : "auto")};
+  height: ${(props) => (props.isMobile ? "32px" : "38px")};
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 12px;
+  padding-left: ${(props) => (props.isMobile ? "8px" : "12px")};
   border: 1px solid ${(props) => props.theme.colors.border.card};
 
   @media (min-width: ${(props) => props.theme.breakpoints.sm}) {
@@ -49,10 +54,12 @@ const StyledInputBase = styled(InputBase)`
   width: 100%;
 
   .MuiInputBase-input {
-    padding: ${(props) => props.theme.spacing(1)};
-    padding-left: ${(props) => props.theme.spacing(3)};
+    padding: ${(props) =>
+      props.isMobile ? props.theme.spacing(0.5) : props.theme.spacing(1)};
+    padding-left: ${(props) =>
+      props.isMobile ? props.theme.spacing(1) : props.theme.spacing(3)};
     width: 100%;
-    font-size: 14px;
+    font-size: ${(props) => (props.isMobile ? "12px" : "14px")};
 
     @media (min-width: ${(props) => props.theme.breakpoints.md}) {
       width: 50ch;
@@ -63,9 +70,10 @@ const StyledInputBase = styled(InputBase)`
 const BreadcrumbBar = styled(Box)`
   background-color: ${(props) => props.theme.colors.background.card};
   border-bottom: 1px solid ${(props) => props.theme.colors.border.card};
-  padding: 12px 16px;
+  padding: ${(props) => (props.isMobile ? "8px 12px" : "12px 16px")};
   align-items: center;
   flex-shrink: 0;
+  display: ${(props) => (props.isMobile ? "none" : "flex")};
 `;
 
 const UserAvatar = styled(Avatar)`
@@ -75,23 +83,24 @@ const UserAvatar = styled(Avatar)`
     props.theme.mode === "light"
       ? props.theme.colors.text.primary.light
       : props.theme.colors.primary.main};
-  width: 36px;
-  height: 36px;
+  width: ${(props) => (props.isMobile ? "32px" : "36px")};
+  height: ${(props) => (props.isMobile ? "32px" : "36px")};
 `;
 
-// Update icon colors based on theme mode
 const StyledIconButton = styled(IconButton)`
   color: ${(props) =>
     props.theme.mode === "light"
       ? props.theme.colors.text.primary.dark
       : props.theme.colors.text.primary.light};
+  padding: ${(props) => (props.isMobile ? "4px" : "8px")};
 `;
 
 const TitleText = styled.p`
   color: ${(props) => (props.theme.mode === "light" ? "#0E253C" : "#FFF")};
   font-weight: 500;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: ${(props) => (props.isMobile ? "10px" : "12px")};
+  line-height: ${(props) => (props.isMobile ? "14px" : "18px")};
+  margin: ${(props) => (props.isMobile ? "0 0 -2px 0" : "0")};
 `;
 
 const SubTitleText = styled.p`
@@ -100,27 +109,138 @@ const SubTitleText = styled.p`
       ? "rgba(14, 37, 60, 0.85)"
       : "rgba(255, 255, 255, 0.80)"};
   font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: ${(props) => (props.isMobile ? "8px" : "12px")};
+  line-height: ${(props) => (props.isMobile ? "12px" : "18px")};
+  margin: 0;
 `;
 
 const Header = () => {
   const { isDarkMode, theme } = useContext(ThemeContext);
+  const muiTheme = useMuiTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <HeaderAppBar position="static">
-        <Toolbar>
+      <HeaderAppBar position="static" isMobile={isMobile}>
+        <Toolbar
+          sx={{
+            minHeight: isMobile ? "56px" : "64px",
+            px: isMobile ? 1 : 2,
+          }}
+        >
           <StyledIconButton
-            size="large"
+            size={isMobile ? "small" : "medium"}
             edge="start"
             aria-label="open drawer"
-            sx={{ mr: 2, display: { xs: "block", sm: "none" } }}
+            onClick={toggleDrawer}
+            isMobile={isMobile}
           >
-            <MenuIcon />
+            <MenuIcon fontSize={isMobile ? "small" : "medium"} />
           </StyledIconButton>
 
+          {!isMobile && (
+            <Box sx={{ display: "flex", alignItems: "center", ml: 1 }}>
+              {!isDarkMode ? (
+                <img
+                  src={"/assets/images/logo-light.png"}
+                  alt="logo"
+                  width={125}
+                  height={32}
+                />
+              ) : (
+                <img
+                  src={"/assets/images/logo-dark.png"}
+                  alt="logo"
+                  width={125}
+                  height={32}
+                />
+              )}
+            </Box>
+          )}
+
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              justifyContent: "center",
+              mx: isMobile ? 1 : 2,
+            }}
+          >
+            <SearchWrapper isMobile={isMobile}>
+              <SearchIcon
+                height={isMobile ? 16 : 20}
+                width={isMobile ? 16 : 20}
+                color={isDarkMode ? "#FFFFFF" : "#0E253C"}
+              />
+              <StyledInputBase
+                placeholder="Search"
+                inputProps={{ "aria-label": "search" }}
+                isMobile={isMobile}
+              />
+            </SearchWrapper>
+          </Box>
+
           <Box sx={{ display: "flex", alignItems: "center" }}>
+            <StyledIconButton
+              size={isMobile ? "small" : "medium"}
+              aria-label="show notifications"
+              isMobile={isMobile}
+            >
+              <Badge badgeContent={0} color="error">
+                <NotificationIcon
+                  height={isMobile ? 16 : 20}
+                  width={isMobile ? 16 : 20}
+                  color={isDarkMode ? "#FFFFFF" : "#0E253C"}
+                  hasFillOpacity={!isDarkMode}
+                />
+              </Badge>
+            </StyledIconButton>
+
+            {!isMobile && <ThemeToggle />}
+
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                ml: isMobile ? 1 : 2,
+              }}
+            >
+              <UserAvatar isMobile={isMobile}>MS</UserAvatar>
+              {!isMobile && (
+                <Box sx={{ ml: 1 }}>
+                  <TitleText isMobile={isMobile}>Manoj Sharma</TitleText>
+                  <SubTitleText isMobile={isMobile}>Super Admin</SubTitleText>
+                </Box>
+              )}
+              <StyledIconButton
+                size="small"
+                sx={{ p: 0, ml: 0.5 }}
+                isMobile={isMobile}
+              >
+                <ExpandMoreIcon fontSize={isMobile ? "small" : "medium"} />
+              </StyledIconButton>
+            </Box>
+          </Box>
+        </Toolbar>
+      </HeaderAppBar>
+
+      <BreadcrumbBar isMobile={isMobile}>
+        <Typography variant="body2" color="text.primary">
+          CRM / Account /{" "}
+          <span style={{ fontWeight: 600 }}>Account Details</span>
+        </Typography>
+      </BreadcrumbBar>
+
+      {/* Side drawer for mobile */}
+      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
+        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer}>
+          {/* Drawer content goes here */}
+          <Box sx={{ p: 2, borderBottom: "1px solid rgba(0,0,0,0.1)" }}>
             {!isDarkMode ? (
               <img
                 src={"/assets/images/logo-light.png"}
@@ -138,64 +258,12 @@ const Header = () => {
             )}
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-            <SearchWrapper>
-              <SearchIcon
-                height={20}
-                width={20}
-                color={isDarkMode ? "#FFFFFF" : "#0E253C"}
-              />
-              <StyledInputBase
-                placeholder="Search"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </SearchWrapper>
-          </Box>
-
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <StyledIconButton size="large" aria-label="show notifications">
-              <Badge badgeContent={0} color="error">
-                <NotificationIcon
-                  height={20}
-                  width={20}
-                  color={isDarkMode ? "#FFFFFF" : "#0E253C"}
-                  hasFillOpacity={!isDarkMode}
-                />
-              </Badge>
-            </StyledIconButton>
+          {/* You can add menu items here */}
+          <Box sx={{ p: 2 }}>
             <ThemeToggle />
-            <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
-              <UserAvatar>MS</UserAvatar>
-              <Box
-                sx={{
-                  ml: 1,
-                  display: {
-                    xs: "none",
-                    sm: "block",
-                  },
-                }}
-              >
-                {/* <Typography
-                  variant="body2"
-                  component="div"
-                  color="themetext.primary"
-                >
-                  Manoj Sharma
-                </Typography> */}
-                <TitleText>Manoj Sharma</TitleText>
-                <SubTitleText>Super Admin</SubTitleText>
-              </Box>
-            </Box>
           </Box>
-        </Toolbar>
-      </HeaderAppBar>
-
-      <BreadcrumbBar>
-        <Typography variant="body2" color="text.primary">
-          CRM / Account /{" "}
-          <span style={{ fontWeight: 600 }}>Account Details</span>
-        </Typography>
-      </BreadcrumbBar>
+        </Box>
+      </Drawer>
     </Box>
   );
 };
