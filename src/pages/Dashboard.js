@@ -51,7 +51,7 @@ const ResponsiveBox = styled(Box)`
   gap: 16px;
   width: 100%;
 
-  @media (max-width: 767px) {
+  @media (max-width: 900px) {
     flex-direction: column;
     gap: 12px;
   }
@@ -61,7 +61,7 @@ const CardContainer = styled(Box)`
   flex: 1 1 calc(50% - 8px);
   min-width: 300px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 900px) {
     flex: 1 1 100%;
     min-width: 100%;
     margin-bottom: 12px;

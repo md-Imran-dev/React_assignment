@@ -42,23 +42,44 @@ const revenueData = [
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   backgroundColor: theme.colors.background.card,
   border: `1px solid ${theme.colors.border.card}`,
-  borderRadius: 20,
+  borderRadius: "12px",
+  // padding: 0, // Ensure no padding in container
+  overflow: "hidden", // Critical - this prevents children from protruding
+
   "& .MuiToggleButtonGroup-grouped": {
     margin: 0,
     border: 0,
+    borderRadius: 0, // Remove individual button border radius
 
     "&.Mui-selected": {
       backgroundColor: theme.colors.background.button,
       color: "inherit",
       fontWeight: 500,
       boxShadow: `0 1px 3px ${theme.colors.Paper}`,
-      border: `1px solid ${theme.colors.border.card}`,
+      // Remove the border that's causing the issue
+      // border: 0,
+      // Add internal border if needed that won't affect outer shape
+      boxSizing: "border-box",
+      position: "relative",
+      "&::after": {
+        content: '""',
+        position: "absolute",
+        top: 1,
+        left: 1,
+        right: 1,
+        bottom: 1,
+        borderRadius: "10px",
+        border: `1px solid ${theme.colors.border.card}`,
+        pointerEvents: "none",
+      },
     },
+
+    // Remove these individual border radius settings
     "&:not(:first-of-type)": {
-      borderRadius: 10,
+      borderRadius: 0,
     },
     "&:first-of-type": {
-      borderRadius: 10,
+      borderRadius: 0,
     },
   },
 }));
@@ -130,7 +151,6 @@ const RevenueDashboard = () => {
             "& .MuiToggleButton-root": {
               fontSize: "12px",
               fontWeight: 400,
-              lineHeight: "18px",
             },
           }}
         >

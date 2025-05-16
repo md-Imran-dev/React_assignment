@@ -260,3 +260,141 @@ export const ReplyIcon = ({ height, width, color, fillOpacity, ...props }) => (
     />
   </svg>
 );
+
+export const TotalOrdersCardIcon = ({ height, width, color, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <rect width={53} height={53} x={0.5} y={0.5} fill={color} rx={11.5} />
+    <rect width={53} height={53} x={0.5} y={0.5} stroke="url(#a)" rx={11.5} />
+    <path
+      fill="url(#b)"
+      fillRule="evenodd"
+      d="M19 15.781c.5-.5 1.178-.78 1.885-.781h12.23c.707 0 1.385.281 1.885.781L38.219 19c.5.5.78 1.178.781 1.885v15.448a4 4 0 0 1-4 4H19a4 4 0 0 1-4-4V20.885c0-.707.281-1.385.781-1.885L19 15.781Zm14.115 1.886h-12.23l-2.666 2.666H35.78l-2.666-2.666ZM24.333 27a1.333 1.333 0 1 0-2.666 0 5.333 5.333 0 1 0 10.666 0 1.333 1.333 0 1 0-2.666 0 2.667 2.667 0 0 1-5.334 0Z"
+      clipRule="evenodd"
+    />
+    <defs>
+      <linearGradient
+        id="a"
+        x1={27}
+        x2={27}
+        y1={0}
+        y2={54}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.495} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+      <linearGradient
+        id="b"
+        x1={27}
+        x2={27}
+        y1={15}
+        y2={40.333}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.5} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+export const TotalTakenCardIcon = ({ height, width, color, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <rect width={53} height={53} x={0.7} y={0.5} fill={color} rx={11.5} />
+    <rect width={53} height={53} x={0.7} y={0.5} stroke="url(#a)" rx={11.5} />
+    <path
+      fill="url(#b)"
+      fillRule="evenodd"
+      d="M39.199 20.139c.044-1.974-.962-3.699-2.444-4.563-1.272-.741-2.847-.81-4.222.05-1.373-.86-2.949-.791-4.221-.05-1.483.864-2.488 2.59-2.444 4.563.057 2.545 2.028 4.618 4.912 6.332.536.317 1.108.677 1.753.677.646 0 1.218-.36 1.754-.677 2.884-1.714 4.854-3.787 4.912-6.332Zm-16.814 7.298-2.653 1.658a2.658 2.658 0 0 0-1.865-.76h-1.334A2.667 2.667 0 0 0 13.867 31v5.334A2.667 2.667 0 0 0 16.533 39h1.334a2.666 2.666 0 0 0 2.309-1.333h1.061c.207 0 .411.048.596.14l3.134 1.567a6.667 6.667 0 0 0 4.289.573l4.28-.855a3.982 3.982 0 0 0 1.613-.722l4.095-3.071a3.222 3.222 0 0 0 1.29-2.577v-.075c0-2.36-2.485-3.896-4.597-2.84-.92.46-1.769 1.167-2.624 1.737.494-1.484-.292-3.13-1.853-3.52l-4.955-1.24a5.334 5.334 0 0 0-4.12.652Z"
+      clipRule="evenodd"
+    />
+    <defs>
+      <linearGradient
+        id="a"
+        x1={27.2}
+        x2={27.2}
+        y1={0}
+        y2={54}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.495} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+      <linearGradient
+        id="b"
+        x1={27.2}
+        x2={27.2}
+        y1={15.001}
+        y2={40.078}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.5} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+export const TotalRevenueCardIcon = ({ height, width, color, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    fill="none"
+    {...props}
+  >
+    <rect width={53} height={53} x={0.9} y={0.5} fill={color} rx={11.5} />
+    <rect width={53} height={53} x={0.9} y={0.5} stroke="url(#a)" rx={11.5} />
+    <g clipPath="url(#b)">
+      <path
+        fill="url(#c)"
+        d="M39.4 32.524v1.81c0 1.085-.508 2.013-1.213 2.742-.698.723-1.644 1.312-2.71 1.779-2.136.933-4.992 1.478-8.077 1.478s-5.941-.544-8.077-1.478c-1.066-.467-2.012-1.056-2.71-1.779-.646-.667-1.126-1.504-1.202-2.475l-.011-.268v-1.809c.62.352 1.283.664 1.992.927 2.707 1.001 6.247 1.56 10.008 1.56 3.761 0 7.301-.559 10.008-1.56a13.538 13.538 0 0 0 1.519-.671l.473-.256Zm-24-7.333c.62.352 1.283.664 1.992.926 2.707 1.002 6.247 1.56 10.008 1.56 3.761 0 7.301-.558 10.008-1.56.71-.262 1.372-.573 1.992-.926v4.14a11.103 11.103 0 0 1-2.917 1.618c-2.34.867-5.552 1.396-9.083 1.396-3.53 0-6.741-.529-9.083-1.396a11.103 11.103 0 0 1-2.917-1.618v-4.14ZM27.4 15c3.085 0 5.941.544 8.077 1.479 1.066.466 2.012 1.056 2.71 1.778.646.667 1.126 1.504 1.202 2.475l.01.268v.997a11.099 11.099 0 0 1-2.916 1.619c-2.34.867-5.552 1.396-9.083 1.396-3.53 0-6.741-.53-9.083-1.396-.932-.345-1.773-.8-2.54-1.341l-.377-.278V21c0-1.085.508-2.013 1.213-2.743.698-.722 1.644-1.312 2.71-1.778C21.459 15.545 24.315 15 27.4 15Z"
+      />
+    </g>
+    <defs>
+      <linearGradient
+        id="a"
+        x1={27.4}
+        x2={27.4}
+        y1={0}
+        y2={54}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.495} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+      <linearGradient
+        id="c"
+        x1={27.4}
+        x2={27.4}
+        y1={15}
+        y2={40.333}
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#C521FF" />
+        <stop offset={0.5} stopColor="#FF2164" />
+        <stop offset={1} stopColor="#FF9B21" />
+      </linearGradient>
+      <clipPath id="b">
+        <path fill="#fff" d="M11.4 11h32v32h-32z" />
+      </clipPath>
+    </defs>
+  </svg>
+);

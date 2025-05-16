@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import "./DemoDashboard.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import styled from "styled-components";
 import { orderMetrics } from "../../data/orderData";
-import { TotalOrdersIcon } from "../../svgs/icons";
+import { TotalOrdersCardIcon, TotalOrdersIcon } from "../../svgs/icons";
+import ThemeContext from "../../context/ThemeContext";
 
 const MainContainer = styled.div`
   background: ${(props) => props.theme.colors.background.card};
@@ -69,6 +70,7 @@ const MetricValue = styled.div`
 
 const DemoDashboard = () => {
   const scrollRef = useRef(null);
+  const { isDarkMode } = useContext(ThemeContext);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -102,11 +104,7 @@ const DemoDashboard = () => {
             <Card key={index}>
               {/* --- TOP PART --- */}
               <CardTop>
-                <CardIconGradient>
-                  <CardIconInner>
-                    <span className="metric-icon-emoji">{metric.icon}</span>
-                  </CardIconInner>
-                </CardIconGradient>
+                {metric.icon(isDarkMode ? "#010D19" : "#fff")}
                 <div>
                   <MetricTitle>{metric.title}</MetricTitle>
                   <MetricValue>{metric.value}</MetricValue>
