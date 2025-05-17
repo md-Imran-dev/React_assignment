@@ -1,8 +1,11 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Label } from "recharts";
 import { pieData, PIE_COLORS } from "../data/chartData";
+import { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
 
 export default function DonutPieChart() {
+  const { theme } = useContext(ThemeContext);
   // Calculate total value from the imported data
   const total = pieData.reduce((sum, entry) => sum + entry.value, 0);
 
@@ -46,6 +49,7 @@ export default function DonutPieChart() {
           dominantBaseline="central"
           fontSize="18"
           fontWeight="bold"
+          fill={theme.colors.text.primary.dark}
         >
           {total}
         </text>
@@ -54,7 +58,7 @@ export default function DonutPieChart() {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={242}>
+    <ResponsiveContainer width="auto%" height={242}>
       <PieChart>
         <Pie
           data={pieData}

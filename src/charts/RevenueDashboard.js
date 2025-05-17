@@ -28,6 +28,14 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   borderRadius: "12px",
   overflow: "hidden",
 
+  "& .MuiToggleButton-root": {
+    fontSize: "12px",
+    fontWeight: 400,
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+
   "& .MuiToggleButtonGroup-grouped": {
     margin: 0,
     border: 0,
@@ -51,13 +59,6 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
         border: `1px solid ${theme.colors.border.card}`,
         pointerEvents: "none",
       },
-    },
-
-    "&:not(:first-of-type)": {
-      borderRadius: "12px",
-    },
-    "&:first-of-type": {
-      borderRadius: "12px",
     },
   },
 }));
@@ -104,12 +105,6 @@ const RevenueDashboard = () => {
           onChange={handleViewChange}
           aria-label="view selector"
           size="small"
-          sx={{
-            "& .MuiToggleButton-root": {
-              fontSize: "12px",
-              fontWeight: 400,
-            },
-          }}
         >
           <ToggleButton value="revenue" aria-label="revenue view">
             Revenue

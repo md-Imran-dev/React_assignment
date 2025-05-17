@@ -4,7 +4,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Dashboard from "./pages/Dashboard";
 import AppThemeProvider from "./styles/ThemeProvider";
 import { ThemeProvider } from "./context/ThemeContext";
-import CardDashboard from "./updatedUI/CardDashboard.js";
 function App() {
   return (
     <ThemeProvider>
@@ -13,7 +12,6 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/carddashboard" element={<CardDashboard />} />
           </Routes>
         </BrowserRouter>
       </AppThemeProvider>
