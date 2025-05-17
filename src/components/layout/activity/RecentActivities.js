@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Paper,
@@ -8,8 +8,6 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Tabs,
-  Tab,
 } from "@mui/material";
 import styled from "styled-components";
 import ThemeContext from "../../../context/ThemeContext";
@@ -18,6 +16,7 @@ import {
   activities,
   processActivitiesRelationships,
 } from "../../../data/activitiesData";
+import ToggleButton from "../../common/ToggleButton";
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -64,26 +63,6 @@ const TimeText = styled(Typography)(({ theme }) => ({
   alignItems: "center",
   fontWeight: "500",
 }));
-
-const StyledTab = styled(Tab)({
-  textTransform: "none",
-  fontWeight: "500",
-  color: "inherit",
-  fontSize: "14px",
-  padding: "10px 16px",
-  transition: "all 0.2s ease",
-  height: "25px",
-  "&.Mui-selected": {
-    color: "#6B46C1",
-    fontWeight: "bold",
-    backgroundColor: "rgba(107, 70, 193, 0.1)",
-    height: "25px",
-  },
-});
-
-const StyledTabs = styled(Tabs)({
-  "& .MuiTabs-indicator": { display: "none" },
-});
 
 const ScrollableList = styled(List)`
   ::-webkit-scrollbar {
@@ -140,19 +119,11 @@ const isFirstInThread = (activity, index, dateGroup) => {
 };
 
 const RecentActivities = () => {
-  const { theme, isDarkMode } = useContext(ThemeContext);
-  const [view, setView] = useState(0);
+  const { theme } = useContext(ThemeContext);
 
   // Process activities to determine relationships
   const processedActivities = processActivitiesRelationships(activities);
   const groupedActivities = groupByDate(processedActivities);
-
-  const handleChange = (event, newValue) => {
-    setView(newValue);
-  };
-
-  // Get the active background color based on theme
-  const activeBackgroundColor = isDarkMode ? "#8378FF" : "#FFF";
 
   return (
     <Paper
@@ -180,45 +151,7 @@ const RecentActivities = () => {
         >
           Recent Activities
         </Typography>
-
-        <StyledTabs
-          value={view}
-          onChange={handleChange}
-          sx={{
-            border: `1px solid ${theme.colors.border.card}`,
-            borderRadius: "24px",
-            height: "38px",
-          }}
-        >
-          <StyledTab
-            label="Message"
-            sx={{
-              borderRadius: "20px",
-              "&.Mui-selected": {
-                backgroundColor: activeBackgroundColor,
-                color: theme.colors.primary.main,
-                height: "38px",
-                fontSize: "14px",
-                fontWeight: "500",
-                boxShadow: "1px 1px 3px 0px rgba(0, 0, 0, 0.06)",
-              },
-            }}
-          />
-          <StyledTab
-            label="Email"
-            sx={{
-              borderRadius: "20px",
-              "&.Mui-selected": {
-                backgroundColor: activeBackgroundColor,
-                color: theme.colors.primary.main,
-                height: "38px",
-                fontSize: "14px",
-                fontWeight: "500",
-                boxShadow: "1px 1px 3px 0px rgba(0, 0, 0, 0.06)",
-              },
-            }}
-          />
-        </StyledTabs>
+        <ToggleButton tabs={["Message", "Email"]} />
       </HeaderContainer>
 
       <ScrollableList sx={{ p: 0, maxHeight: 370, overflow: "auto" }}>

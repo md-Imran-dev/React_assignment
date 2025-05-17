@@ -4,7 +4,6 @@ import {
   Paper,
   Typography,
   ToggleButtonGroup,
-  ToggleButton,
   Select,
   MenuItem,
 } from "@mui/material";
@@ -19,60 +18,13 @@ import {
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ThemeContext from "../context/ThemeContext";
-import styled from "styled-components";
 import { revenueData } from "../data/revenueData";
-
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
-  backgroundColor: theme.colors.background.card,
-  border: `1px solid ${theme.colors.border.card}`,
-  borderRadius: "12px",
-  overflow: "hidden",
-
-  "& .MuiToggleButton-root": {
-    fontSize: "12px",
-    fontWeight: 400,
-    "&:hover": {
-      backgroundColor: "transparent",
-    },
-  },
-
-  "& .MuiToggleButtonGroup-grouped": {
-    margin: 0,
-    border: 0,
-    borderRadius: "12px",
-
-    "&.Mui-selected": {
-      backgroundColor: theme.colors.background.button,
-      color: "inherit",
-      fontWeight: 500,
-      boxShadow: `0 1px 3px ${theme.colors.Paper}`,
-      boxSizing: "border-box",
-      position: "relative",
-      "&::after": {
-        content: '""',
-        position: "absolute",
-        top: 1,
-        left: 1,
-        right: 1,
-        bottom: 1,
-        borderRadius: "12px",
-        border: `1px solid ${theme.colors.border.card}`,
-        pointerEvents: "none",
-      },
-    },
-  },
-}));
+import ToggleButton from "../components/common/ToggleButton";
 
 const RevenueDashboard = () => {
-  const [view, setView] = useState("revenue");
   const [category, setCategory] = useState("All Categories");
   const [year, setYear] = useState("2023");
   const { theme } = useContext(ThemeContext);
-  const handleViewChange = (event, newView) => {
-    if (newView !== null) {
-      setView(newView);
-    }
-  };
 
   return (
     <Paper
@@ -99,24 +51,7 @@ const RevenueDashboard = () => {
           },
         }}
       >
-        <StyledToggleButtonGroup
-          value={view}
-          exclusive
-          onChange={handleViewChange}
-          aria-label="view selector"
-          size="small"
-        >
-          <ToggleButton value="revenue" aria-label="revenue view">
-            Revenue
-          </ToggleButton>
-          <ToggleButton value="orders" aria-label="orders view">
-            Orders
-          </ToggleButton>
-          <ToggleButton value="customers" aria-label="customers view">
-            Customers
-          </ToggleButton>
-        </StyledToggleButtonGroup>
-
+        <ToggleButton tabs={["Revenue", "Orders", "Customers"]} />
         <Box
           sx={{
             display: "flex",

@@ -205,10 +205,10 @@ const RecentOrders = () => {
               <TableRow key={order.id}>
                 <StyledTableCell>{order.id}</StyledTableCell>
                 <StyledTableCell>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <QuantityLabel
-                      sx={{ color: theme.colors.text.secondary, gap: "4px" }}
-                    >
+                  <Box
+                    sx={{ display: "flex", alignItems: "center", gap: "8px" }}
+                  >
+                    <QuantityLabel sx={{ color: theme.colors.text.secondary }}>
                       x{order.quantity}
                     </QuantityLabel>
                     <ProductWrapper>
@@ -237,7 +237,7 @@ const RecentOrders = () => {
                   </Box>
                 </StyledTableCell>
                 <StyledTableCell>
-                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
                     <ChannelChip
                       variant="outlined"
                       size="small"
