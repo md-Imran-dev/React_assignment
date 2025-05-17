@@ -22,7 +22,7 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: theme.spacing(1.5, 2),
+  padding: "12px 16px",
   borderBottom: `1px solid ${theme.colors.border.card}`,
 }));
 
@@ -134,7 +134,7 @@ const RecentActivities = () => {
         width: "100%",
         border: `1px solid ${theme.colors.border.card}`,
         backgroundColor: theme.colors.background.main,
-        padding: "0px 20px 20px 20px",
+        // padding: "0px 20px 20px 20px",
       }}
     >
       <HeaderContainer>

@@ -169,14 +169,18 @@ const RecentOrders = () => {
         backgroundColor: theme.colors.background.main,
       }}
     >
-      <Box sx={{ p: 3, pb: 1 }}>
+      <Box
+        sx={{
+          padding: "12px 16px",
+          borderBottom: `1px solid ${theme.colors.border.card}`,
+        }}
+      >
         <Typography
           variant="h6"
-          fontWeight="bold"
+          fontWeight="600"
           sx={{
             color: theme.colors.text.primary,
             fontSize: "18px",
-            padding: "12px 12px 12px 16px",
           }}
         >
           Recent Orders

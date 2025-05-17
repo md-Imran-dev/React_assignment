@@ -40,7 +40,7 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
             border: `1px solid ${theme.colors.border.card}`,
             borderBottom:
               activeTab === tab
-                ? `1px solid ${theme.colors.border.card}`
+                ? `1px solid ${theme.colors.background.card}`
                 : "none",
           }}
         >

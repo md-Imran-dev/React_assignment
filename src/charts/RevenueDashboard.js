@@ -1,12 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  Box,
-  Paper,
-  Typography,
-  ToggleButtonGroup,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { Box, Paper, Typography, Select, MenuItem } from "@mui/material";
 import {
   BarChart,
   Bar,

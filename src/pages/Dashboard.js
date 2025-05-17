@@ -50,11 +50,6 @@ const ResponsiveBox = styled(Box)`
   flex-wrap: wrap;
   gap: 16px;
   width: 100%;
-
-  @media (max-width: 900px) {
-    flex-direction: column;
-    gap: 12px;
-  }
 `;
 
 const CardContainer = styled(Box)`

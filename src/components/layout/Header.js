@@ -6,7 +6,6 @@ import {
   Typography,
   InputBase,
   Badge,
-  Avatar,
   useMediaQuery,
   useTheme as useMuiTheme,
   Drawer,
@@ -16,8 +15,12 @@ import styled from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ThemeContext from "../../context/ThemeContext";
-import { NotificationIcon, SearchIcon } from "../../svgs/icons";
-import { DarkModeIcon, LightModeIcon } from "../../svgs/icons";
+import {
+  NotificationIcon,
+  SearchIcon,
+  DarkModeIcon,
+  LightModeIcon,
+} from "../../svgs/icons";
 
 const StyledThemeIconButton = styled(IconButton)`
   color: ${(props) => props.theme.colors.text.primary.dark};
@@ -48,14 +51,14 @@ const ThemeToggle = () => {
       >
         {isDarkMode ? (
           <LightModeIcon
-            width={isMobile ? 20 : 22}
-            height={isMobile ? 20 : 22}
+            width={24}
+            height={24}
             color={isDarkMode ? "#FFFFFF" : "#1C274C"}
           />
         ) : (
           <DarkModeIcon
-            width={isMobile ? 20 : 22}
-            height={isMobile ? 20 : 22}
+            width={24}
+            height={24}
             color={isDarkMode ? "#FFFFFF" : "#1C274C"}
           />
         )}
@@ -122,15 +125,22 @@ const BreadcrumbBar = styled(Box)`
   display: ${(props) => (props.isMobile ? "none" : "flex")};
 `;
 
-const UserAvatar = styled(Avatar)`
+const UserAvatar = styled.div`
   background-color: ${(props) =>
     props.theme.mode === "light" ? "#513CCE" : "#8378FF"};
   color: ${(props) =>
     props.theme.mode === "light"
       ? props.theme.colors.text.primary.light
       : props.theme.colors.primary.main};
-  width: ${(props) => (props.isMobile ? "32px" : "36px")};
-  height: ${(props) => (props.isMobile ? "32px" : "36px")};
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
 `;
 
 const StyledIconButton = styled(IconButton)`
@@ -139,6 +149,7 @@ const StyledIconButton = styled(IconButton)`
       ? props.theme.colors.text.primary.dark
       : props.theme.colors.text.primary.light};
   padding: ${(props) => (props.isMobile ? "4px" : "8px")};
+  background-color: red;
 `;
 
 const TitleText = styled.p`
@@ -158,6 +169,19 @@ const SubTitleText = styled.p`
   font-size: ${(props) => (props.isMobile ? "8px" : "12px")};
   line-height: ${(props) => (props.isMobile ? "12px" : "18px")};
   margin: 0;
+`;
+
+const NotificationButton = styled.button`
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid ${(props) => props.theme.colors.border.card};
+  background: ${(props) => props.theme.colors.background.main};
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  margin-left: 8px;
 `;
 
 const Header = () => {
@@ -232,20 +256,16 @@ const Header = () => {
           </Box>
           {!isMobile && <ThemeToggle />}
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <StyledIconButton
-              size={isMobile ? "small" : "medium"}
-              aria-label="show notifications"
-              isMobile={isMobile}
-            >
+            <NotificationButton>
               <Badge badgeContent={0} color="error">
                 <NotificationIcon
-                  height={isMobile ? 16 : 20}
-                  width={isMobile ? 16 : 20}
+                  height={20}
+                  width={20}
                   color={isDarkMode ? "#FFFFFF" : "#0E253C"}
                   hasFillOpacity={!isDarkMode}
                 />
               </Badge>
-            </StyledIconButton>
+            </NotificationButton>
 
             <Box
               sx={{

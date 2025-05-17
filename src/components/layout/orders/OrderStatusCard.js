@@ -11,7 +11,7 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: theme.spacing(2, 2),
+  padding: "12px 16px",
   borderBottom: `1px solid ${theme.colors.border.card}`,
 
   "@media (max-width: 767px)": {
@@ -73,6 +73,7 @@ const ChartContainer = styled(Box)(({ theme }) => ({
 const ContentContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
+  flexWrap: "wrap",
 
   "@media (max-width: 767px)": {
     flexDirection: "column",
@@ -100,9 +101,10 @@ const OrderStatusCard = () => {
           variant="h6"
           fontWeight="600"
           sx={{
-            fontSize: "16px",
-            padding: "12px 12px 12px 16px",
+            fontSize: "18px",
+            // padding: "12px 12px 12px 16px",
             color: theme.colors.text.primary,
+            fontWeight: "600",
           }}
         >
           Order Status

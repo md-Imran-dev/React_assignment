@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, IconButton } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import React, { useState } from "react";
+import { Box, Typography, TextField, Button, IconButton } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import PhoneNumberInput from './PhoneNumberInput';
-import AddIcon from '@mui/icons-material/Add';
-import styled from 'styled-components';
-import { SaveIcon } from '../../../svgs/icons';
+import PhoneNumberInput from "./PhoneNumberInput";
+import AddIcon from "@mui/icons-material/Add";
+import styled from "styled-components";
+import { SaveIcon } from "../../../svgs/icons";
 
 const MainContainer = styled.div`
   padding: 16px;
   align-self: stretch;
-  background-color: ${props => props.theme.colors.background.card};
-  border: 1px solid ${props => props.theme.colors.border.card};
+  background-color: ${(props) => props.theme.colors.background.card};
+  border: 1px solid ${(props) => props.theme.colors.border.card};
   border-radius: 24px;
   width: 100%;
   height: auto;
@@ -19,26 +19,26 @@ const MainContainer = styled.div`
 
 // Common styles for all input fields
 const inputStyles = {
-  '& .MuiInputBase-input': {
-    fontSize: '14px'
-  }
+  "& .MuiInputBase-input": {
+    fontSize: "14px",
+  },
 };
 
 const BusinessDetailsForm = () => {
   const [formData, setFormData] = useState({
-    accountName: 'TRUCK GREAR',
-    email: 'Jillali@Onechanneladmin.Com',
-    contactOwner: 'Suchithkumar@Onechanneladmin.Com',
+    accountName: "TRUCK GREAR",
+    email: "Jillali@Onechanneladmin.Com",
+    contactOwner: "Suchithkumar@Onechanneladmin.Com",
     phoneNumbers: [
-      { country: 'US', number: '+1 344 434 4455' },
-      { country: 'US', number: '+1 344 434 4455' }
-    ]
+      { country: "US", number: "+1 344 434 4455" },
+      { country: "US", number: "+1 344 434 4455" },
+    ],
   });
 
   const handleAddPhone = () => {
     setFormData({
       ...formData,
-      phoneNumbers: [...formData.phoneNumbers, { country: 'US', number: '' }]
+      phoneNumbers: [...formData.phoneNumbers, { country: "US", number: "" }],
     });
   };
 
@@ -62,34 +62,54 @@ const BusinessDetailsForm = () => {
 
   return (
     <MainContainer>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+        }}
+      >
         <Typography variant="h6" fontWeight="bold" fontSize="16px">
           Business Details
         </Typography>
-        
+
         <Button
           startIcon={<SaveIcon height={14} width={14} />}
-        style={{fontSize: '14px' }}>
+          style={{ fontSize: "14px", color: "#22C55E" }}
+        >
           Save & Close
         </Button>
       </Box>
-      
+
       <Box sx={{ mb: 3 }}>
-        <Typography variant="subtitle2" gutterBottom fontWeight="bold" fontSize="12px">
+        <Typography
+          variant="subtitle2"
+          gutterBottom
+          fontWeight="bold"
+          fontSize="12px"
+        >
           Account Name
         </Typography>
         <TextField
           fullWidth
           value={formData.accountName}
-          onChange={(e) => setFormData({ ...formData, accountName: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, accountName: e.target.value })
+          }
           variant="outlined"
           size="small"
           sx={inputStyles}
         />
       </Box>
-      
+
       <Box sx={{ mb: 3 }}>
-        <Typography variant="subtitle2" gutterBottom fontWeight="bold" fontSize="12px">
+        <Typography
+          variant="subtitle2"
+          gutterBottom
+          fontWeight="bold"
+          fontSize="12px"
+        >
           Email
         </Typography>
         <TextField
@@ -101,22 +121,29 @@ const BusinessDetailsForm = () => {
           sx={inputStyles}
         />
       </Box>
-      
+
       <Box sx={{ mb: 3 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="subtitle2" gutterBottom fontWeight="bold" fontSize="12px">
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            fontWeight="bold"
+            fontSize="12px"
+          >
             Phone Number
           </Typography>
-          <IconButton
-            color="primary"
-            size="small"
-            sx={{ color: '#9c27b0' }}
-          >
+          <IconButton color="primary" size="small" sx={{ color: "#9c27b0" }}>
             <AddIcon onClick={handleAddPhone} />
           </IconButton>
         </Box>
-        
-        <PhoneNumberInput 
+
+        <PhoneNumberInput
           phoneNumbers={formData.phoneNumbers}
           onAddPhone={handleAddPhone}
           onRemovePhone={handleRemovePhone}
@@ -124,16 +151,23 @@ const BusinessDetailsForm = () => {
           onChangeNumber={handleChangeNumber}
         />
       </Box>
-      
+
       <Box>
-        <Typography variant="subtitle2" gutterBottom fontWeight="bold" fontSize="12px">
+        <Typography
+          variant="subtitle2"
+          gutterBottom
+          fontWeight="bold"
+          fontSize="12px"
+        >
           Contact Owner
         </Typography>
         <TextField
           select
           fullWidth
           value={formData.contactOwner}
-          onChange={(e) => setFormData({ ...formData, contactOwner: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, contactOwner: e.target.value })
+          }
           variant="outlined"
           size="small"
           sx={inputStyles}
